@@ -61,10 +61,10 @@ session_start();
 
             <div class="row">
                 <div class="col-lg-6 text-center">
-                    Esqueceu sua senha? <a href="recuperar_senha.php">Clique aqui</a>
+                    Esqueceu a senha? <a href="recuperar_senha.php">Clique aqui</a>
                 </div>
                 <div class="col-lg-6 text-center">
-                    Não tenho cadastro? <a href="cadastro_de_usuarios.php">Clique aqui</a>
+                    Cadastre-se <a href="cadastro_de_usuarios.php">Aqui</a>
                 </div>
             </div>
         </form>
