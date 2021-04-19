@@ -21,24 +21,24 @@ session_start();
 
 <body class="bg-light">
 
-    <?php /*
+    <?php
     unset(
         $_SESSION['nome_user'],
         $_SESSION['id_user'],
         $_SESSION['email_user'],
         $_SESSION['senha_user'],
         $_SESSION['tipo_user']
-    );*/
+    );
     ?>
 
     <div class="container">
-        <form action="logar.php" method="post">
+        <form action="includes/logar.php" method="post">
             <h1 class="h1 text-center">LOGIN</h1>
             <div class="row">
                 <div class="col-12">
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
-                            required>
+                        <input type="email" class="form-control" id="floatingInput" name="email"
+                            placeholder="name@example.com" required>
                         <label for="floatingInput">Email</label>
                     </div>
                 </div>
@@ -46,8 +46,8 @@ session_start();
             <div class="row">
                 <div class="col-12">
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
-                            required>
+                        <input type="password" class="form-control" id="floatingPassword" name="pass"
+                            placeholder="Password" required>
                         <label for="floatingPassword">Senha</label>
                     </div>
                 </div>
@@ -56,6 +56,18 @@ session_start();
             <div class="row mb-3">
                 <div class="col-12">
                     <input type="submit" value="LOGIN" class="btn btn-success btn-lg col-12">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <?php
+                    if (isset($_SESSION['login_erro'])) {
+                        echo $_SESSION['login_erro'];
+                        unset($_SESSION['login_erro']);
+                    }
+                    ?>
+
                 </div>
             </div>
 
