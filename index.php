@@ -19,7 +19,7 @@ session_start();
     <title>SEDGE</title>
 </head>
 
-<body>
+<body class="bg-light">
 
     <?php /*
     unset(
