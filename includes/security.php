@@ -10,6 +10,5 @@ if (
         $_SESSION['senha_user'],
         $_SESSION['tipo_user']
     );
-    session_destroy();
-    header("Location: ../index.php");
+    header("Location: ../../sedge/index.php");
 }

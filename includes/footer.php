@@ -1,8 +1,6 @@
 <footer class="d-flex flex-column align-items-center text-small mt-5">
 
 
-
-
     <nav class="nav">
         <ul class="list-inline text-center px-5">
             <li class="list-inline-item p-2">

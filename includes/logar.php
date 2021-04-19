@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once("conexao.php");
+include_once("security.php");
 
 $email = $_POST['email'];
 $pass = $_POST['pass'];
@@ -20,5 +21,5 @@ if (empty($resultado = mysqli_fetch_assoc($result))) {
     $_SESSION['email_user'] = $resultado['email_usu'];
     $_SESSION['senha_user'] = $resultado['senha_usu'];
     $_SESSION['tipo_user'] = $resultado['tipo_usu'];
-    header("Location: ../home.php");
+    header("Location: ../../sedge/home.php");
 }
