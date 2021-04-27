@@ -1,0 +1,7 @@
+.bg2{
+    background-color:rgba(0, 217, 255, .1);
+}
+nav,
+nav>ul{
+    height: 100vh;
+}

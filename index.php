@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -30,11 +32,12 @@ session_start();
     );
     ?>
 
-    <div class="container">
+    <div class="container pt-3">
+
+        <h1 class="h1 text-center my-5">LOGIN</h1>
         <form action="includes/logar.php" method="post">
-            <h1 class="h1 text-center">LOGIN</h1>
             <div class="row">
-                <div class="col-12">
+                <div class="col-md-6 mx-auto">
                     <div class="form-floating mb-3">
                         <input type="email" class="form-control" id="floatingInput" name="email"
                             placeholder="name@example.com" required>
@@ -43,23 +46,24 @@ session_start();
                 </div>
             </div>
             <div class="row">
-                <div class="col-12">
+                <div class="col-md-6 mx-auto">
                     <div class="form-floating mb-3">
                         <input type="password" class="form-control" id="floatingPassword" name="pass"
-                            placeholder="Password" required>
+                            placeholder="Password" autocomplete="off" required>
                         <label for="floatingPassword">Senha</label>
                     </div>
                 </div>
             </div>
 
-            <div class="row mb-3">
-                <div class="col-12">
-                    <input type="submit" value="LOGIN" class="btn btn-success btn-lg col-12">
+
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <input type="submit" class="btn btn-success btn-lg w-100" value="LOGIN">
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-12">
+                <div class="col-md-6 mx-auto m-1">
                     <?php
                     if (isset($_SESSION['login_erro'])) {
                         echo $_SESSION['login_erro'];
@@ -71,18 +75,27 @@ session_start();
             </div>
 
             <div class="row">
-                <div class="col-lg-6 text-center">
-                    Esqueceu a senha? <a href="recuperar_senha.php">Clique aqui</a>
-                </div>
-                <div class="col-lg-6 text-center">
-                    Cadastre-se <a href="cadastro_de_usuarios.php">Aqui</a>
+                <div class="col-md-6 mx-auto">
+                    <div class="row">
+                        <div class="col-md-6 text-center py-3">
+                            Esqueceu a senha? <a href="recuperar_senha.php" class="link">Clique aqui</a>
+                        </div>
+
+                        <div class="col-md-6 text-center py-3">
+                            Cadastre-se <a href="cad_usu.php" class="link">Aqui</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>
-
-        <?php
-        include_once 'includes/footer.php';
-        ?>
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-6 mx-auto">
+            <?php
+            include_once 'includes/footer.php';
+            ?>
+        </div>
+    </div>
     </div>
 
 
