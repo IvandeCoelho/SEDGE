@@ -27,15 +27,22 @@
 
         <form>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-floating">
                         <input type="text" class="form-control" id="floatingInput" placeholder="Nome" name="nome"
                             required>
                         <label for="floatingInput">Nome</label>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="sobrenome"
+                            name="sobrenome" required>
+                        <label for="floatingInput">Sobrenome</label>
+                    </div>
+                </div>
 
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-floating">
                         <input type="date" class="form-control" id="floatingInput" placeholder="Data de Nascimento"
                             name="ddn" required>
