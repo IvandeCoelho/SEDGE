@@ -1,8 +1,7 @@
 <?php
 session_start();
-include_once("includes/conexao.php");
-include_once("includes/security.php");
-
+include_once("../includes/conexao.php");
+include_once("../includes/security.php");
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -20,6 +19,7 @@ include_once("includes/security.php");
     <!-- Estilo da pagina -->
     <link rel="stylesheet" href="css/home.css">
     <script src="js/menu.js"></script>
+
     <title>SEDGE</title>
 </head>
 
@@ -37,10 +37,10 @@ CMYK 48 0 100 1
 
 <body class="bg-light">
 
-    <header class="bg-ifce bg-ifce px-5">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-ifce">
+    <header class="bg-ifce bg-dark px-5">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-ifce bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">SEDGE</a>
+                <a class="navbar-brand" href="home.php">SEDGE</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -54,13 +54,13 @@ CMYK 48 0 100 1
                                 <li><a href="home.php" class="dropdown-item">
                                         <i class="fas fa-home"></i>
                                         Home</a></li>
-                                <li><a href="home.php?pages=usuarios.php" class="dropdown-item">
+                                <li><a href="home.php?pages=list_users.php" class="dropdown-item">
                                         <i class="fas fa-users"></i> Usuarios</a></li>
                                 <li><a href="home.php?pages=eventos.php" class="dropdown-item">
                                         <i class="fas fa-calendar-alt"></i>
                                         Eventos <span style="float: right;">&raquo;</span></a>
 
-                                    <ul class=" submenu dropdown-menu">
+                                    <ul class="submenu dropdown-menu">
                                         <li><a href="" class="dropdown-item">
                                                 <i class="fas fa-calendar-plus"></i>
                                                 Criar</a></li>
@@ -151,16 +151,23 @@ CMYK 48 0 100 1
 
 
     <section>
-        <div class="bg-light container">
+        <div class="container bg-light">
             <div class="row">
                 <div class="col-12 text-end">
-                    <?php include_once('includes/return_type.php'); ?></div>
+
+                    <div class="">
+                        <script type="text/javascript" src="//widget.supercounters.com/ssl/online_t.js"></script>
+                        <script type="text/javascript">
+                        sc_online_t(1467207, "Usuarios Online", "170ddb");
+                        </script>
+                    </div>
+
+                    <?php include_once('../includes/return_type.php'); ?>
+                </div>
             </div>
             <div class="row">
-
                 <div class="col-12">
                     <?php
-
                     @$pagina = $_GET['pages'];
 
                     if (isset($pagina)) {
@@ -170,6 +177,10 @@ CMYK 48 0 100 1
                     <h1 class="h1 text-center fw-light py-3">BEM VINDO AO SISTEMA DE GERENCIAMENTO DE EVENTOS DO IFCE -
                         TAUÁ
                     </h1>
+
+
+
+
                     <?php
                     }
                     ?>
@@ -179,7 +190,7 @@ CMYK 48 0 100 1
             <div class="row">
                 <div class="col-12 mt-5">
                     <?php
-                    include_once 'includes/footer.php';
+                    include_once '../includes/footer.php';
                     ?>
                 </div>
             </div>

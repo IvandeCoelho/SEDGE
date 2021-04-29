@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once("conexao.php");
-include_once("security.php");
+include_once("../../includes/conexao.php");
+include_once("../../includes/security.php");
 
 $email = $_POST['email'];
 $pass = $_POST['pass'];
@@ -26,5 +26,9 @@ if (empty($resultado = mysqli_fetch_assoc($result))) {
   $_SESSION['senha_user'] = $resultado['senha_usu'];
   $_SESSION['tipo_user'] = $resultado['tipo_usu'];
 
-  header("Location: ../../sedge/home.php");
+  if ($_SESSION['tipo_user'] == 1) {
+    header("Location: ../../../sedge/admin/home.php");
+  } else {
+    header("Location: ../../../sedge/home.php");
+  }
 }

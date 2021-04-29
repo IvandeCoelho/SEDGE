@@ -36,9 +36,12 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="sobrenome"
-                            name="sobrenome" required>
-                        <label for="floatingInput">Sobrenome</label>
+                        <input type="text" class="form-control" id="floatingInput" placeholder="apelido" name="apelido"
+                            required>
+                        <label for="floatingInput">Como gostaria de ser chamado?</label>
+                        <span id="passwordHelpInline" class="form-text">
+                            Maximo trinta (30) caracteres.
+                        </span>
                     </div>
                 </div>
 
