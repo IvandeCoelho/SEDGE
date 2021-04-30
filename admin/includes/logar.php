@@ -19,6 +19,7 @@ if (empty($resultado = mysqli_fetch_assoc($result))) {
   </div>';
   header("Location:../index.php");
 } else {
+
   $_SESSION['id_user'] = $resultado['id_usu'];
   $_SESSION['nome_user'] = $resultado['nome_usu'];
   $_SESSION['apelido_user'] = $resultado['apelido_usu'];
@@ -27,8 +28,8 @@ if (empty($resultado = mysqli_fetch_assoc($result))) {
   $_SESSION['tipo_user'] = $resultado['tipo_usu'];
 
   if ($_SESSION['tipo_user'] == 1) {
-    header("Location: ../../../sedge/admin/home.php");
+    header("Location: ../home.php");
   } else {
-    header("Location: ../../../sedge/home.php");
+    header("Location: ../../home.php");
   }
 }

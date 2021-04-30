@@ -154,14 +154,6 @@ CMYK 48 0 100 1
         <div class="container bg-light">
             <div class="row">
                 <div class="col-12 text-end">
-
-                    <div class="">
-                        <script type="text/javascript" src="//widget.supercounters.com/ssl/online_t.js"></script>
-                        <script type="text/javascript">
-                        sc_online_t(1467207, "Usuarios Online", "170ddb");
-                        </script>
-                    </div>
-
                     <?php include_once('../includes/return_type.php'); ?>
                 </div>
             </div>

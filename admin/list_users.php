@@ -242,37 +242,42 @@ $(document).ready(function() {
                         class='fas fa-trash-alt'></i></a></td>";
         echo "</tr>"; */
                 ?>
+
+         <!-- For para multiplicar a quantidade de usuarios listados na tabela para possiveis testes-->
+         <?php for ($i = 0; $i < 5; $i++) { ?>
+
          <tr>
              <td><?php echo $nomeUsuario; ?></td>
              <td><?php echo $apelidoUsuario; ?></td>
              <td><?php echo date('d/m/Y', strtotime($dataNascimento)); ?></td>
              <td><?php echo $email; ?></td>
              <td><?php
-                        switch ($tipoUsuario) {
-                            case 1:
-                                echo "Administrador";
-                                break;
-                            case 2:
-                                echo "Coordenador";
-                                break;
-                            case 3:
-                                echo "AUX. CORRD";
-                                break;
-                            case 4:
-                                echo "Colaborador";
-                                break;
-                            default:
-                                echo "Participante";
-                                break;
-                        }
+                            switch ($tipoUsuario) {
+                                case 1:
+                                    echo "Administrador";
+                                    break;
+                                case 2:
+                                    echo "Coordenador";
+                                    break;
+                                case 3:
+                                    echo "AUX. CORRD";
+                                    break;
+                                case 4:
+                                    echo "Colaborador";
+                                    break;
+                                default:
+                                    echo "Participante";
+                                    break;
+                            }
 
-                        ?>
+                            ?>
              </td>
              <td>
                  <a href="home.php?pages=edit_users.php&id=<?php echo $idUsuario; ?>"><i class='fas fa-edit'></i></a>
                  <a href="home.php?pages=details_usu.php&id=<?php echo $idUsuario; ?>"><i class='fas fa-eye'></i></a>
                  <a href=''><i class='fas fa-trash-alt'></i></a>
              </td>
+             <?php } ?>
          </tr>
          <?php } ?>
      </tbody>
