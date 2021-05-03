@@ -22,13 +22,6 @@
     });
     </script>
 
-    <style>
-    .row>[class^=col-] {
-        padding-top: .75rem;
-        padding-bottom: .75rem;
-    }
-    </style>
-
     <title>Cadastre-se</title>
 </head>
 
@@ -39,14 +32,14 @@
 
         <form>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4 mb-3">
                     <div class="form-floating">
                         <input type="text" class="form-control" id="floatingInput" placeholder="Nome" name="nome"
                             required>
                         <label for="floatingInput">Nome</label>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 mb-3">
                     <div class="form-floating">
                         <input type="text" class="form-control" id="floatingInput" placeholder="apelido" name="apelido"
                             required>
@@ -57,7 +50,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-4 mb-3">
                     <div class="form-floating">
                         <input type="date" class="form-control" id="floatingInput" placeholder="Data de Nascimento"
                             name="ddn" required>
@@ -67,14 +60,14 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 mb-3">
                     <div class="form-floating">
                         <input type="text" class="form-control" id="cpf" placeholder="CPF" name="cpf" min="1" required>
                         <label for="floatingInput">CPF</label>
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-6 mb-3">
                     <div class="form-floating">
                         <select class="form-select" aria-label="Default select example" name="sexo" required>
                             <option selected disabled>Selecione</option>
@@ -87,21 +80,21 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 mb-3">
                     <div class="form-floating">
                         <input type="text" class="form-control" id="floatingInput" placeholder="Cidade" name="endereco"
                             required>
                         <label for="floatingInput">Endereço</label>
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 mb-3">
                     <div class="form-floating">
                         <input type="number" class="form-control" id="floatingInput" placeholder="Numero"
                             name="num_endereco" min="0" max="9999" required>
                         <label for="floatingInput">Numero</label>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 mb-3">
                     <div class="form-floating">
                         <input type="text" class="form-control" id="floatingInput" placeholder="Bairro" name="bairro"
                             required>
@@ -111,14 +104,14 @@
 
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 mb-3">
                     <div class="form-floating">
                         <input type="text" class="form-control" id="floatingInput" placeholder="Cidade" name="cidade"
                             required>
                         <label for="floatingInput">Cidade</label>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 mb-3">
 
                     <div class="form-floating">
                         <select class="form-select" aria-label="Default select example" name="estado" required>
@@ -165,7 +158,7 @@
                     </div>
 
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 mb-3">
                     <div class="form-floating">
                         <input type="text" class="form-control" id="cep" placeholder="CEP" name="cep" min="1" required>
                         <label for="floatingInput">CEP</label>
@@ -176,7 +169,7 @@
 
 
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 mb-3">
                     <div class="form-floating">
                         <input type="email" class="form-control" id="floatingInput" placeholder="email" name="email"
                             required>
@@ -185,37 +178,51 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 mb-3">
                     <div class="form-floating">
-                        <input type="password" class="form-control" id="floatingInput" placeholder="Senha" name="pass"
-                            required>
+
+                        <input type="password" class="form-control" id="floatingPassword" name="pass"
+                            placeholder="Senha" onkeyup="forcaSenha()" onfocus="display()" required autocomplete="off">
                         <label for="floatingInput">Senha</label>
-                        <span id="passwordHelpInline" class="form-text">
-                            Minimo de seis (6) caracteres.
-                        </span>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 mb-3">
                     <div class="form-floating">
-                        <input type="password" class="form-control" id="floatingInput" placeholder="Confirme a senha"
-                            name="pass_conf" required>
-                        <label for="floatingInput">Confirme a senha</label>
+                        <input type="password" class="form-control" id="floatingPassword2"
+                            placeholder="Confirme a senha" name="pass_conf" onfocus="verificaCaracteres()" required>
+                        <label for="floatingPassword2">Confirme a senha</label>
+                        <div id="feed5" style="display: none;">Senhas iguais</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <div id="stts" style="display:none;">
+                        <div class="info my-2" style="font-size:.8rem;">
+                            <div id="feed1">Minimo 8 Caracteres</div>
+                            <div id="feed2">Numeros [0-9]</div>
+                            <div id="feed3">Letras Miusculas[A - Z]</div>
+                            <div id="feed4">Caracters especiais [! @ # $ % & * ;]</div>
+                        </div>
+                        <!-- <div id="impSenha"></div>-->
+                        <!-- s<div id="impForcaSenha"></div>-->
+                        <div id="erroForcaSenha"></div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 mb-3">
                     <input type="submit" class="btn btn-success btn-lg w-100" value="Cadastrar">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 mb-3">
                     <a href="index.php" class="btn btn-danger btn-lg w-100">Cancelar</a>
                 </div>
             </div>
         </form>
 
         <div class="row">
-            <div class="col-12 mt-5">
+            <div class="col-12">
                 <?php
                 include_once 'includes/footer.php';
                 ?>
@@ -223,7 +230,7 @@
         </div>
     </div>
 
-
+    <script src="js/forcaSenha.js"></script>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
