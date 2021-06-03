@@ -6,7 +6,7 @@ include_once("../../includes/security.php");
 $email = $_POST['email'];
 $pass = $_POST['pass'];
 $escaped_email =  mysqli_real_escape_string($conn, $email);
-$escaped_pass =  mysqli_real_escape_string($conn, $pass);
+$escaped_pass =  md5(md5(mysqli_real_escape_string($conn, $pass)));
 
 
 $logando = "SELECT * FROM usuarios WHERE email_usu = '$escaped_email' AND senha_usu = '$escaped_pass' ";
@@ -19,7 +19,6 @@ if (empty($resultado = mysqli_fetch_assoc($result))) {
   </div>';
   header("Location:../index.php");
 } else {
-
   $_SESSION['id_user'] = $resultado['id_usu'];
   $_SESSION['nome_user'] = $resultado['nome_usu'];
   $_SESSION['apelido_user'] = $resultado['apelido_usu'];

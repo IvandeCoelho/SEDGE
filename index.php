@@ -69,6 +69,10 @@ session_start();
                         echo $_SESSION['login_erro'];
                         unset($_SESSION['login_erro']);
                     }
+                    if (isset($_SESSION['msn'])) {
+                        echo $_SESSION['msn'];
+                        unset($_SESSION['msn']);
+                    }
 
                     ?>
 

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="pt-br">
 
@@ -30,19 +33,17 @@
     <div class="container">
         <h1 class="h1 text-center my-5">CADASTRO</h1>
 
-        <form>
+        <form action="includes/valida_cad_usu.php" method="post">
             <div class="row">
                 <div class="col-md-4 mb-3">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="Nome" name="nome"
-                            required>
-                        <label for="floatingInput">Nome</label>
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Nome" name="nome">
+                        <label for="floatingInput">Nome completo</label>
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="apelido" name="apelido"
-                            required>
+                        <input type="text" class="form-control" id="floatingInput" placeholder="apelido" name="apelido">
                         <label for="floatingInput">Como gostaria de ser chamado?</label>
                         <span id="passwordHelpInline" class="form-text">
                             Maximo trinta (30) caracteres.
@@ -53,7 +54,7 @@
                 <div class="col-md-4 mb-3">
                     <div class="form-floating">
                         <input type="date" class="form-control" id="floatingInput" placeholder="Data de Nascimento"
-                            name="ddn" required>
+                            name="ddn">
                         <label for="floatingInput">Data de Nascimento</label>
                     </div>
                 </div>
@@ -62,14 +63,14 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="cpf" placeholder="CPF" name="cpf" min="1" required>
+                        <input type="text" class="form-control" id="cpf" placeholder="CPF" name="cpf" min="1">
                         <label for="floatingInput">CPF</label>
                     </div>
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <div class="form-floating">
-                        <select class="form-select" aria-label="Default select example" name="sexo" required>
+                        <select class="form-select" aria-label="Default select example" name="sexo">
                             <option selected disabled>Selecione</option>
                             <option value="M">Masculino</option>
                             <option value="F">Feminino</option>
@@ -82,22 +83,20 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="Cidade" name="endereco"
-                            required>
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Cidade" name="endereco">
                         <label for="floatingInput">Endereço</label>
                     </div>
                 </div>
                 <div class="col-md-2 mb-3">
                     <div class="form-floating">
                         <input type="number" class="form-control" id="floatingInput" placeholder="Numero"
-                            name="num_endereco" min="0" max="9999" required>
+                            name="num_endereco" min="0" max="9999">
                         <label for="floatingInput">Numero</label>
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="Bairro" name="bairro"
-                            required>
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Bairro" name="bairro">
                         <label for="floatingInput">Bairro</label>
                     </div>
                 </div>
@@ -106,15 +105,14 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="Cidade" name="cidade"
-                            required>
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Cidade" name="cidade">
                         <label for="floatingInput">Cidade</label>
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
 
                     <div class="form-floating">
-                        <select class="form-select" aria-label="Default select example" name="estado" required>
+                        <select class="form-select" aria-label="Default select example" name="uf">
                             <option selected disabled>Selecione</option>
                             <optgroup label="Norte">
                                 <option value="AC"> Acre </option>
@@ -160,7 +158,7 @@
                 </div>
                 <div class="col-md-2 mb-3">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="cep" placeholder="CEP" name="cep" min="1" required>
+                        <input type="text" class="form-control" id="cep" placeholder="CEP" name="cep" min="1">
                         <label for="floatingInput">CEP</label>
                     </div>
                 </div>
@@ -171,8 +169,7 @@
             <div class="row">
                 <div class="col-md-12 mb-3">
                     <div class="form-floating">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="email" name="email"
-                            required>
+                        <input type="email" class="form-control" id="floatingInput" placeholder="email" name="email">
                         <label for="floatingInput">Email</label>
                     </div>
                 </div>
@@ -182,14 +179,14 @@
                     <div class="form-floating">
 
                         <input type="password" class="form-control" id="floatingPassword" name="pass"
-                            placeholder="Senha" onkeyup="forcaSenha()" onfocus="display()" required autocomplete="off">
+                            placeholder="Senha" onkeyup="forcaSenha()" onfocus="display()" autocomplete="off">
                         <label for="floatingInput">Senha</label>
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <div class="form-floating">
                         <input type="password" class="form-control" id="floatingPassword2"
-                            placeholder="Confirme a senha" name="pass_conf" onfocus="verificaCaracteres()" required>
+                            placeholder="Confirme a senha" name="pass_conf" onkeyup="validatePassword()">
                         <label for="floatingPassword2">Confirme a senha</label>
                         <div id="feed5" style="display: none;">Senhas iguais</div>
                     </div>
@@ -209,11 +206,19 @@
                         <div id="erroForcaSenha"></div>
                     </div>
                 </div>
+                <div class="col-md-12 mb-3">
+                    <?php
+                    if (isset($_SESSION['login_erro'])) {
+                        echo $_SESSION['login_erro'];
+                        unset($_SESSION['login_erro']);
+                    }
+                    ?>
+                </div>
             </div>
 
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <input type="submit" class="btn btn-success btn-lg w-100" value="Cadastrar">
+                    <input type="submit" class="btn btn-success btn-lg w-100" value="Cadastrar" name="btnCadUsu">
                 </div>
                 <div class="col-md-6 mb-3">
                     <a href="index.php" class="btn btn-danger btn-lg w-100">Cancelar</a>
@@ -230,11 +235,27 @@
         </div>
     </div>
 
+    <script>
+    var password = document.getElementById("pass"),
+        confirm_password = document.getElementById("pass_conf");
+
+    function validatePassword() {
+        if (password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Senhas diferentes!");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+    </script>
+
     <script src="js/forcaSenha.js"></script>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
     </script>
-
-
 </body>
+
+</html>

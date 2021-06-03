@@ -34,13 +34,13 @@ function mostrarForca(forca) {
     //document.getElementById('impForcaSenha').innerHTML = "Forca: " + forca;
 
     if (forca < 30) {
-        document.getElementById('erroForcaSenha').innerHTML = "<div class='alert alert-danger' role='alert'>A força da sua senha é: <strong>Fraca!</strong></div>";
+        document.getElementById('erroForcaSenha').innerHTML = '<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">A força da senha é <strong>Fraca!</strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
     } else if ((forca >= 30) && (forca < 50)) {
-        document.getElementById('erroForcaSenha').innerHTML = "<div class='alert alert-warning' role='alert'>A força da sua senha é: <strong>Média!</strong></div>";
+        document.getElementById('erroForcaSenha').innerHTML = '<div class="alert alert-warning alert-dismissible fade show text-center" role="alert">A força da senha é <strong>Média!</strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
     } else if ((forca >= 50) && (forca < 70)) {
-        document.getElementById('erroForcaSenha').innerHTML = "<div class='alert alert-primary' role='alert'>A força da sua senha é: <strong>Boa!</strong></div>";
+        document.getElementById('erroForcaSenha').innerHTML = '<div class="alert alert-primary alert-dismissible fade show text-center" role="alert">A força da senha é <strong>Boa!</strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
     } else if ((forca >= 70) && (forca < 100)) {
-        document.getElementById('erroForcaSenha').innerHTML = "<div class='alert alert-success' role='alert'>A força da sua senha é: <strong>Segura!</strong></div>";
+        document.getElementById('erroForcaSenha').innerHTML = '<div class="alert alert-success alert-dismissible fade show text-center" role="alert">A força da senha é <strong>Segura!</strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
     }
 }
 

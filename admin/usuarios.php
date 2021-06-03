@@ -1,13 +1,13 @@
- <!-- Estilo da pagina -->
- <!-- Estilo da pagina -->
- <script src="datatables/jquery-3.5.1.js"></script>
- <script src="datatables/jquery.dataTables.min.js"></script>
- <script src="datatables/dataTables.bootstrap5.min.js"></script>
+<!-- Estilo da pagina -->
+<!-- Estilo da pagina -->
+<script src="datatables/jquery-3.5.1.js"></script>
+<script src="datatables/jquery.dataTables.min.js"></script>
+<script src="datatables/dataTables.bootstrap5.min.js"></script>
 
- <link rel="stylesheet" href="css/bootstrap.min.css">
- <link rel="stylesheet" href="css/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/dataTables.bootstrap5.min.css">
 
- <script>
+<script>
 $(document).ready(function() {
     $('#example').DataTable({
 
@@ -195,103 +195,146 @@ $(document).ready(function() {
         }
     });
 });
- </script>
+</script>
 
 
- <?php
-    //DATA ATUAL
-    $dataAtual = date('Y-m-d');
-    //BUSCAR TODOS OS USUÁRIOS CADASTRADOS
-    $buscar_usuarios = "SELECT * FROM usuarios";
-    $resultado = mysqli_query($conn, $buscar_usuarios);
-    ?>
- <h1 class="h1 text-center py-3">Lista de Usuarios</h1>
+<?php
+//DATA ATUAL
+$dataAtual = date('Y-m-d');
+//BUSCAR TODOS OS USUÁRIOS CADASTRADOS
+$buscar_usuarios = "SELECT * FROM usuarios";
+$resultado = mysqli_query($conn, $buscar_usuarios);
+?>
+<h1 class="h1 text-center py-3">Lista de Usuarios</h1>
 
- <table id="example" class="table table-striped table-hover">
-     <thead class="">
-         <tr class="text-center bg-dark text-light">
-             <th scope="col">Nome</th>
-             <th scope="col">Apelido</th>
-             <th scope="col">Data de Nascimento</th>
-             <th scope="col">Email</th>
-             <th scope="col">Tipo de Usuário</th>
-             <th scope="col">Ações</th>
-         </tr>
-     </thead>
-     <tbody>
+<table id="example" class="table table-striped table-hover table-bordered">
+    <thead class="">
+        <tr class="text-center bg-dark text-light">
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Apelido</th>
+            <th scope="col">Data de Nascimento</th>
+            <th scope="col">Email</th>
+            <th scope="col">Tipo de Usuário</th>
+            <th scope="col">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
 
-         <?php
-            while ($rows = mysqli_fetch_array($resultado)) {
-                $idUsuario = $rows['id_usu'];
-                $nomeUsuario = $rows['nome_usu'];
-                $apelidoUsuario = $rows['apelido_usu'];
-                $dataNascimento = $rows['ddn_usu'];
-                $sexo = $rows['sexo_usu'];
-                $cpf = $rows['cpf_usu'];
-                $endereco = $rows['endereco_usu'];
-                $cidade = $rows['cidade_usu'];
-                $cep = $rows['cep_usu'];
-                $estado = $rows['uf_usu'];
-                $email = $rows['email_usu'];
-                $tipoUsuario = $rows['tipo_usu'];
-            ?>
-         <?php /*
+        <?php
+        while ($rows = mysqli_fetch_array($resultado)) {
+            $idUsuario = $rows['id_usu'];
+            $nomeUsuario = $rows['nome_usu'];
+            $apelidoUsuario = $rows['apelido_usu'];
+            $dataNascimento = $rows['ddn_usu'];
+            $sexo = $rows['sexo_usu'];
+            $cpf = $rows['cpf_usu'];
+            $endereco = $rows['endereco_usu'];
+            $cidade = $rows['cidade_usu'];
+            $cep = $rows['cep_usu'];
+            $estado = $rows['uf_usu'];
+            $email = $rows['email_usu'];
+            $tipoUsuario = $rows['tipo_usu'];
+        ?>
+        <?php /*
         echo "<td>" . date('d/m/Y', strtotime($dataNascimento)) . "</td>";
         echo "<td><a href='editarUsuario.php?id=$idUsuario'><i class='fas fa-edit'></i></a> <a
                     href='detalhesUsuarios.php?id=$idUsuario'><i class='fas fa-eye'></i></a> <a href=''><i
                         class='fas fa-trash-alt'></i></a></td>";
         echo "</tr>"; */
-                ?>
-
-         <!-- For para multiplicar a quantidade de usuarios listados na tabela para possiveis testes-->
-         <?php for ($i = 0; $i < 5; $i++) { ?>
-
-         <tr>
-             <td><?php echo $nomeUsuario; ?></td>
-             <td><?php echo $apelidoUsuario; ?></td>
-             <td><?php echo date('d/m/Y', strtotime($dataNascimento)); ?></td>
-             <td><?php echo $email; ?></td>
-             <td><?php
-                            switch ($tipoUsuario) {
-                                case 1:
-                                    echo "Administrador";
-                                    break;
-                                case 2:
-                                    echo "Coordenador";
-                                    break;
-                                case 3:
-                                    echo "AUX. CORRD";
-                                    break;
-                                case 4:
-                                    echo "Colaborador";
-                                    break;
-                                default:
-                                    echo "Participante";
-                                    break;
-                            }
-
-                            ?>
-             </td>
-             <td>
-                 <a href="home.php?pages=edit_users.php&id=<?php echo $idUsuario; ?>"><i class='fas fa-edit'></i></a>
-                 <a href="home.php?pages=details_usu.php&id=<?php echo $idUsuario; ?>"><i class='fas fa-eye'></i></a>
-                 <a href=''><i class='fas fa-trash-alt'></i></a>
-             </td>
-             <?php } ?>
-         </tr>
-         <?php } ?>
-     </tbody>
-     <tfoot>
-         <tr>
-             <th scope="col">Nome</th>
-             <th scope="col">Apelido</th>
-             <th scope="col">Data de Nascimento</th>
-             <th scope="col">Email</th>
-             <th scope="col">Tipo de Usuário</th>
-             <th scope="col">Ações</th>
-         </tr>
-     </tfoot>
- </table>
+            ?>
 
 
- <a href="cadastraUsuario.php" class="btn btn-primary btn-lg mt-3">CADASTRAR USUARIO</a>
+
+        <tr>
+            <th><?php echo $idUsuario; ?></th>
+            <td><?php echo $nomeUsuario; ?></td>
+            <td><?php echo $apelidoUsuario; ?></td>
+            <td><?php echo date('d/m/Y', strtotime($dataNascimento)); ?></td>
+            <td><?php echo $email; ?></td>
+            <td><?php
+                    switch ($tipoUsuario) {
+                        case 1:
+                            echo "Admin.";
+                            break;
+                        case 2:
+                            echo "Coord.";
+                            break;
+                        case 3:
+                            echo "AUX. CORRD";
+                            break;
+                        case 4:
+                            echo "Colab.";
+                            break;
+                        default:
+                            echo "Part.";
+                            break;
+                    }
+
+                    ?>
+            </td>
+            <td class="d-flex justify-content-around">
+                <a href="home.php?pages=edit_usu.php&id=<?php echo $idUsuario; ?>" class="btn btn-warning btn-sm"
+                    name="edit"><i class="bi bi-pencil-square"></i></a>
+
+                <a onclick="return confirm('Deseja deletar o usuario: <?php echo $idUsuario . ' - ' .  $apelidoUsuario; ?>?')"
+                    href="home.php?pages=includes/delete_usu.php&id=<?php echo $idUsuario; ?>"
+                    class="btn btn-danger btn-sm"><i class="bi bi-x-octagon"></i></a>
+
+
+            </td>
+
+        </tr>
+        <?php } ?>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Apelido</th>
+            <th scope="col">Data de Nascimento</th>
+            <th scope="col">Email</th>
+            <th scope="col">Tipo de Usuário</th>
+            <th scope="col">Ações</th>
+        </tr>
+    </tfoot>
+</table>
+
+
+<a href="cadastraUsuario.php" class="btn btn-success btn-lg mt-3"><i class="bi bi-person-plus-fill"></i> CADASTRAR
+    USUARIO</a>
+
+
+<!-- Toast -->
+<?php
+if (isset($_SESSION['cad-msn'])) {
+    echo $_SESSION['cad-msn'];
+    unset($_SESSION['cad-msn']);
+}
+?>
+<div class="toast border-2 position-absolute bottom-0 end-0 m-2" role="alert" aria-live="assertive" aria-atomic="true"
+    id="EpicToast">
+    <div class="toast-header bg-warning text-dark">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        <strong class="me-auto">Atenção</strong>
+        <small>2 segundos</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body text-dark">
+        Erro ao deletar!
+    </div>
+</div>
+
+
+
+<!-- js das caixas de msn -->
+<script>
+var option = {
+    animation: true,
+    delay: 2000
+};
+
+var toastHTMLElement = document.getElementById('EpicToast');
+var toastElement = new bootstrap.Toast(toastHTMLElement, option);
+
+toastElement.show();
+</script>
