@@ -139,10 +139,9 @@ td:hover {
                 </div>
             </div>
 
-
-
-
-
+            <div class="row my-3">
+                <a href="" class="btn btn-success btn-lg w-100">CRIAR EVENTO</a>
+            </div>
         </form>
     </div>
 </div>

@@ -12,17 +12,8 @@
             </li>
         </ul>
     </nav>
-    <nav class="nav list-inline text-center">
-        <ul class="text-secondary">
-            <li class="list-inline-item h3"><i class="bi bi-facebook"></i></li>
-            <li class="list-inline-item h3"><i class="bi bi-instagram"></i></li>
-            <li class="list-inline-item h3"><i class="bi bi-youtube"></i></li>
-            <li class="list-inline-item h3"><i class="bi bi-twitter"></i></li>
-            <li class="list-inline-item h3"><i class="bi bi-github"></i></li>
-        </ul>
-    </nav>
 
-    <div class="mb-3 text-center">
+    <div class="p-2 text-center">
         &copy; 2021 Ivande Coelho
     </div>
 
