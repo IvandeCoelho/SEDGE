@@ -17,6 +17,34 @@
                                 Home</a></li>
                         <!-- <li><a href="home.php?pages=usuarios.php" class="dropdown-item">
                                         <i class="bi bi-people-fill"></i> Usuarios</a></li> -->
+
+
+                        <li><a href="home.php?pages=vistaTecnica.php" class="dropdown-item">
+
+                                <i class="bi bi-geo-fill"></i>
+                                Visitas Técnica <span style="float: right;">&raquo;</span></a>
+
+                            <ul class=" submenu dropdown-menu">
+                                <?php if ($_SESSION['tipo_user'] == 1) {
+                                    echo '
+                                    <li><a href="home.php?pages=criarVisitaTecnica.php" class="dropdown-item">
+                                <i class="bi bi-node-plus"></i>    
+                                    Criar</a></li>';
+                                } ?>
+
+                                <li><a href="home.php?pages=minhasVisitasTecnica.php" class="dropdown-item">
+                                        <i class="bi bi-ui-checks"></i>
+                                        Minhas Visitas</a></li>
+                                <li><a href="home.php?pages=visitasDisponiveis.php" class="dropdown-item">
+                                        <i class="bi bi-ui-checks-grid"></i>
+                                        Disponiveis</a></li>
+                                <li><a href="home.php?pages=visitasEncerradas.php" class="dropdown-item">
+                                        <i class="bi bi-x-circle"></i>
+                                        Encerradas</a></li>
+                            </ul>
+                        </li>
+
+
                         <li><a href="home.php?pages=eventos.php" class="dropdown-item">
                                 <i class="bi bi-calendar2-week-fill"></i>
                                 Eventos <span style="float: right;">&raquo;</span></a>
@@ -24,7 +52,7 @@
                             <ul class=" submenu dropdown-menu">
                                 <?php if ($_SESSION['tipo_user'] == 1) {
                                     echo '
-                                    <li><a href="" class="dropdown-item">
+                                    <li><a href="home.php?pages=criar_eventos.php" class="dropdown-item">
                                     <i class="bi bi-calendar-plus-fill"></i>
                                     Criar</a></li>';
                                 } ?>

@@ -14,9 +14,15 @@
             <div class="card-body">
                 <h5 class="card-title"><?php echo $dado['nomeEvento'] ?></h5>
                 <p class="card-text" style="text-align: justify;">
-                    <?php echo $dado['descEvento'] ?>
+                    <?php echo substr($dado['descEvento'], 0, 150) . "..."; ?>
                 </p>
-                <a href="" class="btn btn-outline-success w-100">INSCREVER-SE</a>
+                <a href="" class="btn btn-outline-success w-100">INSCREVER-SE
+                    <span class="badge rounded-pill bg-danger">
+                        <?php echo $dado['numMaxParticipante'] ?>
+                    </span>
+
+
+                </a>
             </div>
         </div>
     </div>

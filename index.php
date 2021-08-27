@@ -1,7 +1,5 @@
 <?php
 session_start();
-
-
 ?>
 
 <!DOCTYPE html>
@@ -32,8 +30,7 @@ session_start();
     );
     ?>
 
-    <div class="container pt-3">
-
+    <div class="container">
         <h1 class="h1 text-center my-5">LOGIN</h1>
         <form action="includes/logar.php" method="post">
             <div class="row">
@@ -93,17 +90,15 @@ session_start();
                 </div>
             </div>
         </form>
-    </div>
-    <div class="row mt-5">
-        <div class="col-md-6 mx-auto">
-            <?php
-            include_once 'includes/footer.php';
-            ?>
+
+        <div class="row mt-5">
+            <div class="col-md-6 mx-auto">
+                <?php
+                include_once 'includes/footer.php';
+                ?>
+            </div>
         </div>
     </div>
-    </div>
-
-
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"

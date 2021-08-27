@@ -1,12 +1,12 @@
-<h1 class="h1 text-center">Eventos</h1>
+<h1 class="h1 text-center">Eventos Encerrados</h1>
 
 
 <div class="row row-cols-1 row-cols-md-4 g-4">
 
-    <?php
+    <!-- <?php
     $hoje = date('d/m/Y');
-    echo $hoje
-    ?>
+    echo $hoje;
+    ?> -->
 
     <table class="table table-striped table-bordered table-hover">
         <thead class="table-dark text-center">
