@@ -3,7 +3,7 @@ include_once("conexao.php");
 session_start();
 ob_start();
 //verifica se o botao de envio do formulario foi clicado e redireciona pro login
-//evita o acesso direto da pagina redireciona pro cad_usu.php
+//evita o acesso direto da pagina redireciona pro cadUsuario.php
 if (mysqli_real_escape_string($conn, $_POST['btnCadUsu'])) {
     //receber dados do form com o scape string
     $nome           =       mysqli_real_escape_string($conn, $_POST['nome']);
@@ -21,11 +21,9 @@ if (mysqli_real_escape_string($conn, $_POST['btnCadUsu'])) {
     $senha          =       md5(md5(mysqli_real_escape_string($conn, $_POST['pass'])));
     $confSenha      =       md5(md5(mysqli_real_escape_string($conn, $_POST['pass_conf'])));
 
-    $logradouro = $endereco . ", " . $numEndereco . ", " . $bairro;
-
     //verificar se as senhas são iguaise se verificar se o email ja existe no banco
     if (($senha == $confSenha) and ($senha === $confSenha)) {
-        $logando = "SELECT * FROM usuarios WHERE email_usu = '$email' or cpf_usu = '$cpf'";
+        $logando = "SELECT * FROM usuarios WHERE emailUsuario = '$email' or cpfUsuario = '$cpf'";
         $result = mysqli_query($conn, $logando);
         if (empty($resultado = mysqli_fetch_assoc($result))) {
 
@@ -51,12 +49,12 @@ if (mysqli_real_escape_string($conn, $_POST['btnCadUsu'])) {
             <strong>Atenção!</strong> O CPF ' . $vcpf . ' é invalido!
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>';
-                header("Location:../cad_usu.php");
+                header("Location:../cadUsuario.php");
             } else {
 
                 // gravar dados no banco
-                $sql = "INSERT INTO usuarios ( nome_usu, apelido_usu, ddn_usu, sexo_usu, cpf_usu, endereco_usu, cidade_usu, cep_usu, uf_usu, email_usu, senha_usu, conf_senha_usu, tipo_usu) VALUES ('$nome','$apelido','$ddn','$sexo','$cpf','$logradouro','$cidade','$cep','$uf','$email','$senha','$confSenha',DEFAULT)";
-
+                $sql = "INSERT INTO usuarios(nomeUsuario, apelidoUsuario, ddnUsuario, sexoUsuario, cpfUsuario, enderecoUsuario, numUsuario, bairroUsuario, cidadeUsuario, cepUsuario, ufUsuario, emailUsuario, senhaUsuario, confSenhaUsuario, tipoUsuario)
+                VALUES ('$nome','$apelido','$ddn','$sexo','$cpf','$endereco','$numEndereco','$bairro','$cidade','$cep','$uf','$email','$senha','$confSenha',DEFAULT)";
 
                 $gravar = mysqli_query($conn, $sql);
 
@@ -71,15 +69,15 @@ if (mysqli_real_escape_string($conn, $_POST['btnCadUsu'])) {
             <strong>Atenção!</strong> Esse email já está em uso no momento!
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>';
-            header("Location:../cad_usu.php");
+            header("Location:../cadUsuario.php");
         }
     } else {
         $_SESSION['login_erro'] = '<div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
         <strong>Atenção!</strong> Senhas diferentes!
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>';
-        header("Location:../cad_usu.php");
+        header("Location:../cadUsuario.php");
     }
 } else {
-    header("Location:../cad_usu.php");
+    header("Location:../cadUsuario.php");
 }

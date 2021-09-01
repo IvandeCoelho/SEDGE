@@ -22,10 +22,10 @@
                         <li><a href="home.php?pages=vistaTecnica.php" class="dropdown-item">
 
                                 <i class="bi bi-geo-fill"></i>
-                                Visitas Técnica <span style="float: right;">&raquo;</span></a>
+                                Visita Téc. <span style="float: right;">&raquo;</span></a>
 
                             <ul class=" submenu dropdown-menu">
-                                <?php if ($_SESSION['tipo_user'] == 1) {
+                                <?php if ($_SESSION['tipoUsuario'] == 1) {
                                     echo '
                                     <li><a href="home.php?pages=criarVisitaTecnica.php" class="dropdown-item">
                                 <i class="bi bi-node-plus"></i>    
@@ -45,12 +45,35 @@
                         </li>
 
 
-                        <li><a href="home.php?pages=eventos.php" class="dropdown-item">
+                        <!-- Bloco de adm do sistema -->
+                        <?php if ($_SESSION['tipoUsuario'] == 1) { ?>
+                        <li>
+                            <a href="home.php?pages=frota.php" class="dropdown-item">
+                                <i class="bi bi-truck"></i>
+                                Veiculos <span style="float: right;">&raquo;</span></a>
+
+                            <ul class=" submenu dropdown-menu">
+                                <li><a href="home.php?pages=frota.php" class="dropdown-item">
+                                        <i class="bi bi-truck"></i>
+                                        Frota</a></li>
+                                <li><a href="home.php?pages=fabricante.php" class="dropdown-item">
+                                        <i class="bi bi-tools"></i>
+                                        Fabricantes</a></li>
+                            </ul>
+                        </li>
+
+                        <?php } ?>
+
+
+
+
+
+                        <!-- <li><a href="home.php?pages=eventos.php" class="dropdown-item">
                                 <i class="bi bi-calendar2-week-fill"></i>
                                 Eventos <span style="float: right;">&raquo;</span></a>
 
                             <ul class=" submenu dropdown-menu">
-                                <?php if ($_SESSION['tipo_user'] == 1) {
+                                <?php if ($_SESSION['tipoUsuario'] == 1) {
                                     echo '
                                     <li><a href="home.php?pages=criar_eventos.php" class="dropdown-item">
                                     <i class="bi bi-calendar-plus-fill"></i>
@@ -67,9 +90,9 @@
                                         <i class="bi bi-calendar-x-fill"></i>
                                         Encerrado</a></li>
                             </ul>
-                        </li>
+                        </li> -->
 
-                        <li><a href="" class="dropdown-item">
+                        <!-- <li><a href="" class="dropdown-item">
                                 <i class="bi bi-file-earmark-fill"></i>
                                 Atividades <span style="float: right;">&raquo;</span></a>
                             <ul class="submenu dropdown-menu">
@@ -80,7 +103,7 @@
                                         <i class="bi bi-file-earmark-text-fill"></i>
                                         Minhas Atividades</a></li>
                             </ul>
-                        </li>
+                        </li> -->
 
                         <!-- <li><a href="" class="dropdown-item">
                                         <i class="bi bi-geo-alt-fill"></i>
@@ -93,14 +116,14 @@
                                                 <i class="bi bi-check-square-fill"></i>
                                                 Reservar</a></li>
                                     </ul>
-                                </li> -->
+                                </li>
 
                         <li><a href="" class="dropdown-item">
                                 <i class="bi bi-person-badge-fill"></i>
                                 Credenciamento</a></li>
-                        <!-- <li><a href="" class="dropdown-item">
-                                        <i class="bi bi-ui-checks"></i>
-                                        Frequência</a></li> -->
+                        <li><a href="" class="dropdown-item">
+                                <i class="bi bi-ui-checks"></i>
+                                Frequência</a></li>
                         <li><a href="" class="dropdown-item">
                                 <i class="bi bi-briefcase-fill"></i>
                                 Portifólio</a></li>
@@ -112,7 +135,7 @@
                                 FAQ</a></li>
                         <li><a href="" class="dropdown-item">
                                 <i class="bi bi-question-square-fill"></i>
-                                Sobre</a></li>
+                                Sobre</a></li>-->
                     </ul>
                 </li>
             </ul>
@@ -122,7 +145,7 @@
             <ul class="navbar-nav ms-auto mx-5">
                 <li class="nav-item dropdown">
                     <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                        <?php echo $_SESSION['apelido_user']; ?> </a>
+                        <?php echo $_SESSION['apelidoUsuario']; ?> </a>
                     <ul class="dropdown-menu dropdown-menu-right">
                         <li><a class="dropdown-item" href=" #">
                                 <i class="bi bi-person-lines-fill"></i>

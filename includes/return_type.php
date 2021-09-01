@@ -5,7 +5,7 @@ include_once('security.php');
 
 
 
-switch ($_SESSION['tipo_user']) {
+switch ($_SESSION['tipoUsuario']) {
     case 1:
         echo "ADMIN";
         break;

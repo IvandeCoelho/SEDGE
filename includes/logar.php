@@ -9,7 +9,7 @@ $escaped_email =  mysqli_real_escape_string($conn, $email);
 $escaped_pass =  md5(md5(mysqli_real_escape_string($conn, $pass)));
 
 
-$logando = "SELECT * FROM usuarios WHERE email_usu = '$escaped_email' AND senha_usu = '$escaped_pass' ";
+$logando = "SELECT * FROM usuarios WHERE emailUsuario = '$escaped_email' AND senhaUsuario = '$escaped_pass' ";
 $result = mysqli_query($conn, $logando);
 
 if (empty($resultado = mysqli_fetch_assoc($result))) {
@@ -19,12 +19,12 @@ if (empty($resultado = mysqli_fetch_assoc($result))) {
   </div>';
   header("Location:../index.php");
 } else {
-  $_SESSION['id_user'] = $resultado['id_usu'];
-  $_SESSION['nome_user'] = $resultado['nome_usu'];
-  $_SESSION['apelido_user'] = $resultado['apelido_usu'];
-  $_SESSION['email_user'] = $resultado['email_usu'];
-  $_SESSION['senha_user'] = $resultado['senha_usu'];
-  $_SESSION['tipo_user'] = $resultado['tipo_usu'];
+  $_SESSION['idUsuario'] = $resultado['idUsuario'];
+  $_SESSION['nomeUsuario'] = $resultado['nomeUsuario'];
+  $_SESSION['apelidoUsuario'] = $resultado['apelidoUsuario'];
+  $_SESSION['emailUsuario'] = $resultado['emailUsuario'];
+  $_SESSION['senhaUsuario'] = $resultado['senhaUsuario'];
+  $_SESSION['tipoUsuario'] = $resultado['tipoUsuario'];
 
   header("Location: ../../sedge/home.php");
 }

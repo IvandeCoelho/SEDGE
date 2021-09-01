@@ -1,14 +1,14 @@
 <?php
 if (
-    ($_SESSION['tipo_user'] <> 1)
+    ($_SESSION['tipoUsuario'] <> 1)
 ) {
 
     unset(
-        $_SESSION['id_user'],
-        $_SESSION['nome_user'],
-        $_SESSION['email_user'],
-        $_SESSION['senha_user'],
-        $_SESSION['tipo_user']
+        $_SESSION['idUsuario'],
+        $_SESSION['nomeUsuario'],
+        $_SESSION['emailUsuario'],
+        $_SESSION['senhaUsuario'],
+        $_SESSION['tipoUsuario']
     );
     header("Location: ../../sedge/index.php");
 }
