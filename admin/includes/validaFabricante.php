@@ -3,8 +3,9 @@ session_start();
 include('../../includes/conexao.php');
 
 #cria fabricante
+#verificar a duplicidade de registro
 if (isset($_POST['create'])) {
-    $nomeFabricante = mysqli_real_escape_string($conn, $_POST['nomeFabricante']);
+    $nomeFabricante = strtoupper(mysqli_real_escape_string($conn, $_POST['nomeFabricante']));
     if (empty($nomeFabricante)) {
         $_SESSION['msn'] = '<div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
         <strong>Atenção</strong> não posso gravar campos vazios!

@@ -5,7 +5,9 @@ if (isset($_SESSION['msn'])) {
     unset($_SESSION['msn']);
 }
 ?>
+<!-- Adicionar uma busca por fabricante? -->
 
+<!-- Exibindo lista de fabricantes -->
 <ol class="list-group list-group-flush list-group-numbered">
     <?php
     $sql = "SELECT * FROM fabricante ORDER BY fabricante.nomeFabricante ASC";
@@ -14,7 +16,13 @@ if (isset($_SESSION['msn'])) {
         while ($dado = mysqli_fetch_array($sqlExe)) { ?>
     <li class="list-group-item d-flex justify-content-evenly">
         <div class="w-50">
-            <a href="home.php?pages=fabricante.php&edit=<?php echo $dado['idFabricante'] ?>">
+
+            <img class="me-3" src="img/logoCar48/<?php echo $dado['nomeFabricante'] ?>.png" width="32px"
+                onerror="this.src='img/logoCar48/default.png'">
+
+
+            <a href="home.php?pages=fabricante.php&edit=<?php echo $dado['idFabricante'] ?>" data-bs-toggle="tooltip"
+                data-bs-placement="right" title="Editar">
                 <?php echo $dado['nomeFabricante'] ?>
             </a>
         </div>
@@ -37,7 +45,7 @@ if (isset($_SESSION['msn'])) {
         <p class="mb-0">
             Clique em <button type="button" class="btn btn-success btn-sm" disabled> NOVO <i
                     class="bi bi-plus-circle"></i>
-            </button> para comecarmos.
+            </button> para começarmos.
         </p>
     </div>
 
