@@ -12,7 +12,7 @@ if (mysqli_real_escape_string($conn, $_POST['btnCadUsu'])) {
     $cpf            =       mysqli_real_escape_string($conn, $_POST['cpf']);
     $sexo           =       mysqli_real_escape_string($conn, $_POST['sexo']);
     $endereco       =       mysqli_real_escape_string($conn, $_POST['endereco']);
-    $numEndereco    =       mysqli_real_escape_string($conn, $_POST['num_endereco']);
+    $numEndereco    =       mysqli_real_escape_string($conn, $_POST['numEndereco']);
     $bairro         =       mysqli_real_escape_string($conn, $_POST['bairro']);
     $cidade         =       mysqli_real_escape_string($conn, $_POST['cidade']);
     $uf             =       mysqli_real_escape_string($conn, $_POST['uf']);
@@ -20,6 +20,7 @@ if (mysqli_real_escape_string($conn, $_POST['btnCadUsu'])) {
     $email          =       mysqli_real_escape_string($conn, $_POST['email']);
     $senha          =       md5(md5(mysqli_real_escape_string($conn, $_POST['pass'])));
     $confSenha      =       md5(md5(mysqli_real_escape_string($conn, $_POST['pass_conf'])));
+
 
     //verificar se as senhas são iguaise se verificar se o email ja existe no banco
     if (($senha == $confSenha) and ($senha === $confSenha)) {
@@ -51,17 +52,17 @@ if (mysqli_real_escape_string($conn, $_POST['btnCadUsu'])) {
           </div>';
                 header("Location:../cadUsuario.php");
             } else {
-
                 // gravar dados no banco
-                $sql = "INSERT INTO usuarios(nomeUsuario, apelidoUsuario, ddnUsuario, sexoUsuario, cpfUsuario, enderecoUsuario, numUsuario, bairroUsuario, cidadeUsuario, cepUsuario, ufUsuario, emailUsuario, senhaUsuario, confSenhaUsuario, tipoUsuario)
-                VALUES ('$nome','$apelido','$ddn','$sexo','$cpf','$endereco','$numEndereco','$bairro','$cidade','$cep','$uf','$email','$senha','$confSenha',DEFAULT)";
+                $sql = "INSERT INTO usuarios(nomeUsuario, apelidoUsuario, ddnUsuario, sexoUsuario, cpfUsuario, enderecoUsuario, numUsuario, bairroUsuario, cidadeUsuario, cepUsuario, ufUsuario, emailUsuario, senhaUsuario, confSenhaUsuario, fkNivelUsuario)
+                VALUES ('$nome','$apelido','$ddn','$sexo','$cpf','$endereco','$numEndereco','$bairro','$cidade','$cep','$uf','$email','$senha','$confSenha', DEFAULT)";
 
                 $gravar = mysqli_query($conn, $sql);
 
                 if ($gravar) {
                     echo "<script>alert('Usuário Cadastrado com Sucesso !');window.location.href='../index.php'</script>";
                 } else {
-                    $_SESSION['msg'] = "Erro ao cadastrar o usuário";
+                    #$_SESSION['msg'] = "Erro ao cadastrar o usuário";
+                    echo  "Erro ao cadastrar o usuário";
                 }
             }
         } else {

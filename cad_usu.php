@@ -90,7 +90,7 @@ session_start();
                 <div class="col-md-2 mb-3">
                     <div class="form-floating">
                         <input type="number" class="form-control" id="floatingInput" placeholder="Numero"
-                            name="num_endereco" min="0" max="9999">
+                            name="numEndereco" min="0" max="9999">
                         <label for="floatingInput">Numero</label>
                     </div>
                 </div>

@@ -24,7 +24,7 @@ if (empty($resultado = mysqli_fetch_assoc($result))) {
   $_SESSION['apelidoUsuario'] = $resultado['apelidoUsuario'];
   $_SESSION['emailUsuario'] = $resultado['emailUsuario'];
   $_SESSION['senhaUsuario'] = $resultado['senhaUsuario'];
-  $_SESSION['tipoUsuario'] = $resultado['tipoUsuario'];
+  $_SESSION['tipoUsuario'] = $resultado['fkNivelUsuario'];
 
   header("Location: ../../sedge/home.php");
 }

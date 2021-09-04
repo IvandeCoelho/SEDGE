@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('../../includes/conexao.php');
+include('/../includes/security.php');
 
 #deletar
 if (isset($_GET['del'])) {

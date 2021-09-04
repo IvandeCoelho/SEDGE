@@ -23,7 +23,7 @@
     </nav>
 
     <div class="mb-3 text-center">
-        &copy; 2021 Ivande Coelho
+        <a class="text-decoration-none link" href="home.php"> SEDGE </a>&copy; 2021
     </div>
 
 </footer>

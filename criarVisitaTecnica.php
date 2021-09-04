@@ -137,7 +137,7 @@ td:hover {
                     <div class="row g-2 p-2 mb-2" style="background-color: rgba(0, 0, 0, .08);">
                         <div class="col-md">
                             <label for="formFile" class="form-label">Upload da programação
-                                <strong>[PDF]</strong></label>
+                                <i class="bi bi-file-earmark-pdf"></i></label>
                             <input class="form-control" type="file" id="formFile">
                         </div>
                         <div class="col-md">
@@ -404,14 +404,20 @@ td:hover {
                             <div class="form-floating">
                                 <select class="form-select" id="floatingSelectGrid"
                                     aria-label="Floating label select example" name="veiculo">
-                                    <option selected disabled>Veiculo</option>
-                                    <option value="1">Própio</option>
-                                    <option value="2">Carro 4 vagas</option>
-                                    <option value="3">Van 16 vagas</option>
-                                    <option value="4">Onibus 28 vagas</option>
-                                    <option value="5">Onibus 42 vagas</option>
+                                    <option selected disabled>Selecione o veiculo</option>
+                                    <?php
+                                    $sql = mysqli_query($conn, "SELECT * FROM veiculos");
+                                    if ($sql) {
+                                        while ($carro = mysqli_fetch_array($sql)) { ?>
+
+                                    <option value="<?php echo $carro['idVeiculo'] ?>">
+                                        <?php echo $carro['modeloVeiculo'] ?></option>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
                                 </select>
-                                <label for="floatingSelectGrid">Works with selects</label>
+                                <label for="floatingSelectGrid">Selecione o veiculo</label>
                             </div>
                         </div>
                     </div>

@@ -2,23 +2,11 @@
 include_once('conexao.php');
 include_once('security.php');
 
+$id = $_SESSION['tipoUsuario'];
 
-
-
-switch ($_SESSION['tipoUsuario']) {
-    case 1:
-        echo "ADMIN";
-        break;
-    case 2:
-        echo "COORD";
-        break;
-    case 3:
-        echo "AUX. CORRD";
-        break;
-    case 4:
-        echo "COLAB";
-        break;
-    default:
-        echo "PARTICIPANTE";
-        break;
+$sql = mysqli_query($conn, "SELECT nivelusuario.nivelUsuario AS poder FROM usuarios JOIN nivelusuario ON usuarios.fkNivelUsuario = nivelUsuario.idNivelUsuario WHERE idNivelUsuario = '$id'");
+if ($sql) {
+    while ($dado = mysqli_fetch_array($sql)) {
+        echo $dado['poder'];
+    }
 }
