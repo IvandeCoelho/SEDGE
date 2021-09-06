@@ -27,7 +27,7 @@
                             <ul class=" submenu dropdown-menu">
                                 <?php if ($_SESSION['tipoUsuario'] == 1) {
                                     echo '
-                                    <li><a href="home.php?pages=criarVisitaTecnica.php" class="dropdown-item">
+                                    <li><a href="home.php?pages=../criarVisitaTecnica.php" class="dropdown-item">
                                 <i class="bi bi-node-plus"></i>    
                                     Criar</a></li>';
                                 } ?>

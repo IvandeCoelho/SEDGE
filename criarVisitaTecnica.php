@@ -5,8 +5,7 @@ td:hover {
 </style>
 <h1 class="h1 text-center">Nova Visita Tecnica</h1>
 
-
-<form action="home.php?pages=preview.php" method="post">
+<form action="home.php?pages=../preview.php" method="post">
 
     <div class="accordion mb-3" id="accordionFlushExample">
         <div class="accordion-item">
@@ -16,41 +15,46 @@ td:hover {
                     <strong><i class="bi bi-grid-1x2"></i> Projeto </strong>
                 </button>
             </h2>
+
             <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
                 data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
-
                     <div class="row g-2 mb-2">
-                        <div class="col-md">
+                        <div class="col-md-8">
                             <div class="form-floating">
-                                <select class="form-select" id="floatingSelectGrid"
+                                <select class="form-select" id="floatingSelectGridCurso"
                                     aria-label="Floating label select example" name="curso">
-                                    <option selected>Selecione o curso.</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option selected>Selecione o curso/semestre.</option>
+                                    <?php
+                                    $sqlCurso = mysqli_query($conn, "SELECT * FROM cursos ORDER BY cursos.anoCurso ASC");
+                                    if ($sqlCurso) {
+                                        while ($curso = mysqli_fetch_array($sqlCurso)) { ?>
+
+                                    <option value="<?php echo $curso['idCurso']; ?>">
+                                        <?php echo $curso['anoCurso'] . ' - ' .  $curso['nomeCurso']; ?>
+                                    </option>
+
+                                    <?php
+                                        }
+                                    } ?>
                                 </select>
-                                <label for="floatingSelectGrid">Curso</label>
+                                <label for="floatingSelectGridCurso">Curso</label>
                             </div>
                         </div>
-                        <div class="col-md">
+
+                        <div class="col-md-4">
                             <div class="form-floating">
-                                <select class="form-select" id="floatingSelectGrid2"
-                                    aria-label="Floating label select example" name="semestre">
-                                    <option selected>Selecione o semestre.</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                                <label for="floatingSelectGrid2">Semestre</label>
+                                <input type="number" class="form-control" id="floatingInputQntAlunos"
+                                    placeholder="Nome do evento" min="0" max="255" name="qntAlunos">
+                                <label for="floatingInputQntAlunos">Quantidade de alunos</label>
                             </div>
                         </div>
 
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="number" class="form-control" id="floatingInput"
-                                    placeholder="Nome do evento" min="0" max="255" name="qntAlunos">
-                                <label for="floatingInput">Quantidade de alunos</label>
+                                <input type="text" class="form-control" id="floatingInputNomeVisita"
+                                    placeholder="Nome do evento" name="nomeVt">
+                                <label for="floatingInputNomeVisita">Nome da visita</label>
                             </div>
                         </div>
                     </div>
@@ -80,17 +84,17 @@ td:hover {
 
                     <div class="col-md mb-3">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="floatingInput" name="local">
-                            <label for="floatingInput">Local a ser visitado</label>
+                            <input type="text" class="form-control" id="floatingInputLocal" name="local">
+                            <label for="floatingInputLocal">Local a ser visitado</label>
                         </div>
                     </div>
 
                     <div class="row g-2 mb-3">
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid"
+                                <input type="text" class="form-control" id="floatingInputGridPessoaContato"
                                     name="pessoaContatoLocal">
-                                <label for="floatingInputGrid">Pessoa de contato</label>
+                                <label for="floatingInputGridPessoaContato">Pessoa de contato</label>
                             </div>
                         </div>
                         <div class="col-md">
@@ -151,15 +155,6 @@ td:hover {
                     </div>
                     <div class="row g-2 p-2" style="background-color: rgba(0, 0, 0, .08);">
                         <div class="form-check form-switch col-md">
-                            <input class="form-check-input" type="checkbox" id="gerarCertificado">
-                            <label class="form-check-label" for="gerarCertificado">Gerar Certificado.</label>
-                        </div>
-                        <div class="form-check form-switch col-md">
-                            <input class="form-check-input" type="checkbox" id="inscricaoAtividade">
-                            <label class="form-check-label" for="inscricaoAtividade">Inscrição de
-                                atividades.</label>
-                        </div>
-                        <div class="form-check form-switch col-md">
                             <input class="form-check-input" type="checkbox" id="destaqueBanner">
                             <label class="form-check-label" for="destaqueBanner">Destacar no banner.</label>
                         </div>
@@ -167,6 +162,12 @@ td:hover {
                 </div>
             </div>
         </div>
+
+        <?php
+        $idUsuario =  $_SESSION['idUsuario'];
+        $sqlResponssavel = mysqli_query($conn, "SELECT * FROM usuarios WHERE idUsuario = '$idUsuario'");
+        if ($sqlResponssavel) {
+            while ($usuario = mysqli_fetch_array($sqlResponssavel)) { ?>
 
         <div class="accordion-item">
             <h2 class="accordion-header" id="flush-headingThree">
@@ -178,40 +179,48 @@ td:hover {
             <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
                 data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
+
                     <div class="row g-2 mb-3">
+
+
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid" name="nomeResponsavel">
+                                <input type="text" class="form-control" id="floatingInputGrid" name="nomeResponsavel"
+                                    value="<?php echo $usuario['nomeUsuario'] ?>" disabled>
                                 <label for="floatingInputGrid">Responsavel</label>
                             </div>
                         </div>
 
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid" name="cpfResponsavel">
+                                <input type="text" class="form-control" id="floatingInputGrid" name="cpfResponsavel"
+                                    value="<?php echo $usuario['cpfUsuario'] ?>" disabled>
                                 <label for="floatingInputGrid">CPF</label>
                             </div>
                         </div>
+
                     </div>
                     <div class="row g-2 mb-3">
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid" name="bancoResponsavel">
+                                <input type="text" class="form-control" id="floatingInputGrid" name="bancoResponsavel"
+                                    value="<?php echo $usuario['bancoUsuario'] ?>" disabled>
                                 <label for="floatingInputGrid">Banco</label>
                             </div>
                         </div>
 
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid"
-                                    name="agenciaResponsavel">
+                                <input type="text" class="form-control" id="floatingInputGrid" name="agenciaResponsavel"
+                                    value="<?php echo $usuario['agenciaUsuario'] ?>" disabled>
                                 <label for="floatingInputGrid">Agencia</label>
                             </div>
                         </div>
 
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid" name="contaResponsavel">
+                                <input type="text" class="form-control" id="floatingInputGrid" name="contaResponsavel"
+                                    value="<?php echo $usuario['contaUsuario'] ?>" disabled>
                                 <label for="floatingInputGrid">Conta</label>
                             </div>
                         </div>
@@ -220,30 +229,51 @@ td:hover {
                     <div class="row g-2 mb-3">
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid"
-                                    name="contatoResponsavel">
+                                <input type="text" class="form-control" id="floatingInputGrid" name="contatoResponsavel"
+                                    value="<?php echo $usuario['contatoUsuario'] ?>" disabled>
                                 <label for="floatingInputGrid">Telefone</label>
                             </div>
                         </div>
 
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid" name="wappResponsavel">
+                                <input type="text" class="form-control" id="floatingInputGrid" name="wappResponsavel"
+                                    value="<?php echo $usuario['whatsappUsuario'] ?>" disabled>
                                 <label for="floatingInputGrid">WhatsApp</label>
                             </div>
                         </div>
 
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid" name="emailResponsavel">
+                                <input type="text" class="form-control" id="floatingInputGrid" name="emailResponsavel"
+                                    value="<?php echo $usuario['emailUsuario'] ?>" disabled>
                                 <label for="floatingInputGrid">Email</label>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
+        <?php
+            }
+        }
+        ?>
+
+
+        <datalist id="listaUsuarios">
+            <?php
+            $idUsuario =  $_SESSION['idUsuario'];
+            $sqlAconpanhante = mysqli_query($conn, "SELECT * FROM usuarios");
+            if ($sqlAconpanhante) {
+                while ($acompanhanteUsuario = mysqli_fetch_array($sqlAconpanhante)) { ?>
+            <option value="<?php echo $acompanhanteUsuario['nomeUsuario']; ?>">
+                <?php
+                }
+            }
+                ?>
+        </datalist>
+
+
 
         <div class="accordion-item accordion-hover">
             <h2 class="accordion-header" id="flush-headingFour">
@@ -254,140 +284,34 @@ td:hover {
             </h2>
             <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour"
                 data-bs-parent="#accordionFlushExample">
+
                 <div class="accordion-body">
                     <div class="row g-2 mb-3">
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid" name="nomeAcompanhante1">
-                                <label for="floatingInputGrid">Acompanhante 1</label>
+                                <input class="form-control" list="listaUsuarios" id="acompanhante1"
+                                    placeholder="Acompanhante 01" name="nomeAcompanhante1">
+                                <label for="acompanhante1" class="form-label">Acompanhante 1</label>
                             </div>
                         </div>
 
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid" name="cpfAcompanhante1">
-                                <label for="floatingInputGrid">CPF</label>
-                            </div>
-                        </div>
                     </div>
-                    <div class="row g-2 mb-3">
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid"
-                                    name="bancoAcompanhante1">
-                                <label for="floatingInputGrid">Banco</label>
-                            </div>
-                        </div>
 
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid"
-                                    name="agenciaAcompanhante1">
-                                <label for="floatingInputGrid">Agencia</label>
-                            </div>
-                        </div>
-
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid"
-                                    name="contaAcompanhante1">
-                                <label for="floatingInputGrid">Conta</label>
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="row g-2 mb-3">
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid" name="telAcompanhante1">
-                                <label for="floatingInputGrid">Telefone</label>
-                            </div>
-                        </div>
-
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid" name="wppAcompanhante1">
-                                <label for="floatingInputGrid">WhatsApp</label>
-                            </div>
-                        </div>
-
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid"
-                                    name="emailAcompanhante1">
-                                <label for="floatingInputGrid">Email</label>
+                                <input class="form-control" list="listaUsuarios" id="acompanhante2"
+                                    placeholder="Acompanhante 01" name="nomeAcompanhante2">
+                                <label for="acompanhante2" class="form-label">Acompanhante 2</label>
                             </div>
                         </div>
                     </div>
-                    <div class="row g-2 mb-3">
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid" name="nomeAcompanhante2">
-                                <label for="floatingInputGrid">Acompanhante 2</label>
-                            </div>
-                        </div>
-
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid" name="cpfAcompanhante2">
-                                <label for="floatingInputGrid">CPF</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row g-2 mb-3">
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid"
-                                    name="bancoAcompanhante2">
-                                <label for="floatingInputGrid">Banco</label>
-                            </div>
-                        </div>
-
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid"
-                                    name="agenciaAcompanhante2">
-                                <label for="floatingInputGrid">Agencia</label>
-                            </div>
-                        </div>
-
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid"
-                                    name="contaAcompanhante2">
-                                <label for="floatingInputGrid">Conta</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row g-2 mb-3">
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid" name="telAcompanhante2">
-                                <label for="floatingInputGrid">Telefone</label>
-                            </div>
-                        </div>
-
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid" name="wppAcompanhante2">
-                                <label for="floatingInputGrid">WhatsApp</label>
-                            </div>
-                        </div>
-
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid"
-                                    name="emailAcompanhante2">
-                                <label for="floatingInputGrid">Email</label>
-                            </div>
-                        </div>
-                    </div>
-
-
                 </div>
             </div>
         </div>
+
+
 
         <div class="accordion-item">
             <h2 class="accordion-header" id="flush-headingFive">
@@ -406,9 +330,9 @@ td:hover {
                                     aria-label="Floating label select example" name="veiculo">
                                     <option selected disabled>Selecione o veiculo</option>
                                     <?php
-                                    $sql = mysqli_query($conn, "SELECT * FROM veiculos");
-                                    if ($sql) {
-                                        while ($carro = mysqli_fetch_array($sql)) { ?>
+                                    $sqlVeiculo = mysqli_query($conn, "SELECT * FROM veiculos");
+                                    if ($sqlVeiculo) {
+                                        while ($carro = mysqli_fetch_array($sqlVeiculo)) { ?>
 
                                     <option value="<?php echo $carro['idVeiculo'] ?>">
                                         <?php echo $carro['modeloVeiculo'] ?></option>
