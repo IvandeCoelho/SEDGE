@@ -5,7 +5,7 @@ td:hover {
 </style>
 <h1 class="h1 text-center">Nova Visita Tecnica</h1>
 
-<form action="home.php?pages=../preview.php" method="post">
+<form action="includes/validaVt.php" method="post">
 
     <div class="accordion mb-3" id="accordionFlushExample">
         <div class="accordion-item">
@@ -84,7 +84,8 @@ td:hover {
 
                     <div class="col-md mb-3">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="floatingInputLocal" name="local">
+                            <input type="text" class="form-control" id="floatingInputLocal" name="local"
+                                placeholder="Local a ser visitado">
                             <label for="floatingInputLocal">Local a ser visitado</label>
                         </div>
                     </div>
@@ -93,19 +94,21 @@ td:hover {
                         <div class="col-md">
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="floatingInputGridPessoaContato"
-                                    name="pessoaContatoLocal">
+                                    name="pessoaContatoLocal" placeholder="Pessoa de contato">
                                 <label for="floatingInputGridPessoaContato">Pessoa de contato</label>
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid" name="cidade">
+                                <input type="text" class="form-control" id="floatingInputGrid" name="cidade"
+                                    placeholder="Cidade">
                                 <label for="floatingInputGrid">Cidade</label>
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid" name="uf">
+                                <input type="text" class="form-control" id="floatingInputGrid" name="uf"
+                                    placeholder="UF">
                                 <label for="floatingInputGrid">UF</label>
                             </div>
                         </div>
@@ -114,25 +117,29 @@ td:hover {
                     <div class="row g-2 mb-3">
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="date" class="form-control" id="floatingInputGrid" name="dataVisita">
+                                <input type="date" class="form-control" id="floatingInputGrid" name="dataVisita"
+                                    placeholder="Data da visita">
                                 <label for="floatingInputGrid">Data da visita</label>
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="tel" class="form-control" id="floatingInputGrid" name="contatoTel">
+                                <input type="tel" class="form-control" id="floatingInputGrid" name="contatoTel"
+                                    placeholder="Telefone">
                                 <label for="floatingInputGrid">Telefone</label>
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGrid" name="contatoFax">
+                                <input type="text" class="form-control" id="floatingInputGrid" name="contatoFax"
+                                    placeholder="FAX">
                                 <label for="floatingInputGrid">FAX</label>
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="email" class="form-control" id="floatingInputGrid" name="contatoEmail">
+                                <input type="email" class="form-control" id="floatingInputGrid" name="contatoEmail"
+                                    placeholder="Email">
                                 <label for="floatingInputGrid">Email</label>
                             </div>
                         </div>
@@ -142,21 +149,15 @@ td:hover {
                         <div class="col-md">
                             <label for="formFile" class="form-label">Upload da programação
                                 <i class="bi bi-file-earmark-pdf"></i></label>
-                            <input class="form-control" type="file" id="formFile">
+                            <input class="form-control" type="file" id="formFile" name="programacaoVt">
                         </div>
                         <div class="col-md">
                             <label for="formFile2" class="form-label">Imagem do evento (1:1)</label>
-                            <input class="form-control" type="file" id="formFile2">
+                            <input class="form-control" type="file" id="formFile2" name="imgCapaVt">
                         </div>
                         <div class="col-md">
                             <label for="formFile2" class="form-label">Banner do evento (1920px x 700px)</label>
-                            <input class="form-control" type="file" id="formFile2">
-                        </div>
-                    </div>
-                    <div class="row g-2 p-2" style="background-color: rgba(0, 0, 0, .08);">
-                        <div class="form-check form-switch col-md">
-                            <input class="form-check-input" type="checkbox" id="destaqueBanner">
-                            <label class="form-check-label" for="destaqueBanner">Destacar no banner.</label>
+                            <input class="form-control" type="file" id="formFile2" name="imgBannerVt">
                         </div>
                     </div>
                 </div>
@@ -266,11 +267,12 @@ td:hover {
             $sqlAconpanhante = mysqli_query($conn, "SELECT * FROM usuarios");
             if ($sqlAconpanhante) {
                 while ($acompanhanteUsuario = mysqli_fetch_array($sqlAconpanhante)) { ?>
-            <option value="<?php echo $acompanhanteUsuario['nomeUsuario']; ?>">
-                <?php
+            <option value="<?php echo $acompanhanteUsuario['idUsuario']; ?>">
+                <?php echo $acompanhanteUsuario['nomeUsuario']; ?></option>
+            <?php
                 }
             }
-                ?>
+            ?>
         </datalist>
 
 
@@ -362,39 +364,61 @@ td:hover {
                 <div class="accordion-body">
 
                     <div class="row g-2 p-2">
-                        <div class="form-check form-switch col-md">
-                            <input class="form-check-input" type="checkbox" id="diariaProf" name="diariaProf">
-                            <label class="form-check-label" for="diariaProf">Diaria professor</label>
+                        <div class="form-check col-md">
+                            <input class="form-check-input" type="checkbox" value="Diarias professor"
+                                id="diariaProfessor" name="solicitacoes[]">
+                            <label class="form-check-label" for="diariaProfessor">
+                                Diaria Professor
+                            </label>
                         </div>
-                        <div class="form-check form-switch col-md">
-                            <input class="form-check-input" type="checkbox" id="custoAluno" name="custoAluno">
-                            <label class="form-check-label" for="custoAluno">Ajuda de custo alunos.</label>
+
+                        <div class="form-check col-md">
+                            <input class="form-check-input" type="checkbox" value="Ajuda de custo aluno" id="custoAluno"
+                                name="solicitacoes[]">
+                            <label class="form-check-label" for="custoAluno">
+                                Ajuda de custo aluno
+                            </label>
                         </div>
-                        <div class="form-check form-switch col-md">
-                            <input class="form-check-input" type="checkbox" id="alojamento" name="alojamento">
-                            <label class="form-check-label" for="alojamento">Alojamento.</label>
+
+                        <div class="form-check col-md">
+                            <input class="form-check-input" type="checkbox" value="Colchonetes" id="olchonetes"
+                                name="solicitacoes[]">
+                            <label class="form-check-label" for="colchonetes">
+                                Colchonetes
+                            </label>
                         </div>
-                        <div class="form-check form-switch col-md">
-                            <input class="form-check-input" type="checkbox" id="colchonetes" name="colchonetes">
-                            <label class="form-check-label" for="colchonetes">Colchonetes.</label>
+
+                        <div class="form-check col-md">
+                            <input class="form-check-input" type="checkbox" value="Alojamento" id="alojamento"
+                                name="solicitacoes[]">
+                            <label class="form-check-label" for="alojamento">
+                                Alojamento
+                            </label>
+                        </div>
+
+                        <div class="form-check col-md">
+                            <input class="form-check-input" type="checkbox" value="Nenhuma solicitação" id="outro"
+                                name="solicitacoes[]" checked>
+                            <label class="form-check-label" for="outro">
+                                Nenhum
+                            </label>
+                        </div>
+
+                        <div class="form-floating">
+                            <input class="form-control" id="outros" placeholder="Outras solicitações" name="outrosVt">
+                            <label for="outros" class="form-label">Outros</label>
                         </div>
                     </div>
-
 
                 </div>
             </div>
         </div>
+    </div>
+
 
     </div>
     <input type="submit" value="NOVO EVENTO" class="btn btn-success w-100 btn-lg">
 </form>
-
-
-
-
-
-
-
 
 <?php
 /*$id = $_SESSION['idUsuario'];
