@@ -18,6 +18,11 @@ include_once("includes/security_admin.php");
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <!-- Estilo da pagina -->
     <link rel="stylesheet" href="css/home.css">
+    <style>
+    * {
+        font-family: 'Quicksand', sans-serif;
+    }
+    </style>
 
     <title>SEDGE</title>
 </head>
@@ -43,36 +48,34 @@ CMYK 48 0 100 1
     <section>
         <div class="bg-light container">
             <div class="row">
-                <div class="col-12 text-end">
-                    <?php include_once('../includes/return_type.php'); ?></div>
-            </div>
-            <div class="row">
+                <div class="row">
 
-                <div class="col-12">
-                    <?php
+                    <div class="col-12">
+                        <?php
 
-                    @$pagina = $_GET['pages'];
+                        @$pagina = $_GET['pages'];
 
-                    if (isset($pagina)) {
-                        include $pagina;
-                    } else {
-                    ?>
-                    <h1 class="h1 text-center fw-light py-3">BEM VINDO AO SISTEMA DE GERENCIAMENTO DE EVENTOS DO IFCE -
-                        TAUÁ
-                    </h1>
-                    <?php
-                    }
-                    ?>
+                        if (isset($pagina)) {
+                            include $pagina;
+                        } else {
+                        ?>
+                        <h1 class="h1 text-center fw-light py-3">BEM VINDO AO SISTEMA DE GERENCIAMENTO DE EVENTOS DO
+                            IFCE -
+                            TAUÁ
+                        </h1>
+                        <?php
+                        }
+                        ?>
+                    </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-12 mt-5">
-                    <?php
-                    include_once '../includes/footer.php';
-                    ?>
+                <div class="row">
+                    <div class="col-12 mt-5">
+                        <?php
+                        include_once '../includes/footer.php';
+                        ?>
+                    </div>
                 </div>
-            </div>
 
 
     </section>

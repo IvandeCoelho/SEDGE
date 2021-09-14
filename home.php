@@ -47,10 +47,6 @@ CMYK 48 0 100 1
     <section>
         <div class="bg-light container">
             <div class="row">
-                <div class="col-12 text-end">
-                    <?php include_once('includes/return_type.php'); ?></div>
-            </div>
-            <div class="row">
 
                 <div class="col-12">
                     <?php

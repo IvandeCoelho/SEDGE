@@ -202,8 +202,7 @@ $(document).ready(function() {
 //DATA ATUAL
 $dataAtual = date('Y-m-d');
 //BUSCAR TODOS OS USUÁRIOS CADASTRADOS
-$buscar_usuarios = "SELECT * FROM usuarios";
-$resultado = mysqli_query($conn, $buscar_usuarios);
+$buscarUsuarioarios = mysqli_query($conn, "SELECT * FROM usuarios JOIN nivelusuario ON usuarios.fkNivelUsuario = nivelusuario.idNivelUsuario");
 ?>
 <h1 class="h1 text-center py-3">Lista de Usuarios</h1>
 
@@ -222,19 +221,19 @@ $resultado = mysqli_query($conn, $buscar_usuarios);
     <tbody>
 
         <?php
-        while ($rows = mysqli_fetch_array($resultado)) {
-            $idUsuario = $rows['id_usu'];
-            $nomeUsuario = $rows['nome_usu'];
-            $apelidoUsuario = $rows['apelido_usu'];
-            $dataNascimento = $rows['ddn_usu'];
-            $sexo = $rows['sexo_usu'];
-            $cpf = $rows['cpf_usu'];
-            $endereco = $rows['endereco_usu'];
-            $cidade = $rows['cidade_usu'];
-            $cep = $rows['cep_usu'];
-            $estado = $rows['uf_usu'];
-            $email = $rows['email_usu'];
-            $tipoUsuario = $rows['tipo_usu'];
+        while ($rows = mysqli_fetch_array($buscarUsuarioarios)) {
+            $idUsuario = $rows['idUsuario'];
+            $nomeUsuario = $rows['nomeUsuario'];
+            $apelidoUsuario = $rows['apelidoUsuario'];
+            $dataNascimento = $rows['ddnUsuario'];
+            $sexo = $rows['sexoUsuario'];
+            $cpf = $rows['cpfUsuario'];
+            $endereco = $rows['enderecoUsuario'];
+            $cidade = $rows['cidadeUsuario'];
+            $cep = $rows['cepUsuario'];
+            $estado = $rows['ufUsuario'];
+            $email = $rows['emailUsuario'];
+            $nivelUsuario = $rows['nivelUsuario'];
         ?>
         <?php /*
         echo "<td>" . date('d/m/Y', strtotime($dataNascimento)) . "</td>";
@@ -243,42 +242,19 @@ $resultado = mysqli_query($conn, $buscar_usuarios);
                         class='fas fa-trash-alt'></i></a></td>";
         echo "</tr>"; */
             ?>
-
-
-
         <tr>
-            <th><?php echo $idUsuario; ?></th>
+            <th class="text-center"><?php echo $idUsuario; ?></th>
             <td><?php echo $nomeUsuario; ?></td>
             <td><?php echo $apelidoUsuario; ?></td>
-            <td><?php echo date('d/m/Y', strtotime($dataNascimento)); ?></td>
+            <td class="text-center"><?php echo date('d/m/Y', strtotime($dataNascimento)); ?></td>
             <td><?php echo $email; ?></td>
-            <td><?php
-                    switch ($tipoUsuario) {
-                        case 1:
-                            echo "Admin.";
-                            break;
-                        case 2:
-                            echo "Coord.";
-                            break;
-                        case 3:
-                            echo "AUX. CORRD";
-                            break;
-                        case 4:
-                            echo "Colab.";
-                            break;
-                        default:
-                            echo "Part.";
-                            break;
-                    }
-
-                    ?>
-            </td>
+            <td><?php echo $nivelUsuario; ?></td>
             <td class="d-flex justify-content-around">
-                <a href="home.php?pages=edit_usu.php&id=<?php echo $idUsuario; ?>" class="btn btn-warning btn-sm"
+                <a href="home.php?pages=editUsuario.php&id=<?php echo $idUsuario; ?>" class="btn btn-warning btn-sm"
                     name="edit"><i class="bi bi-pencil-square"></i></a>
 
                 <a onclick="return confirm('Deseja deletar o usuario: <?php echo $idUsuario . ' - ' .  $apelidoUsuario; ?>?')"
-                    href="home.php?pages=includes/delete_usu.php&id=<?php echo $idUsuario; ?>"
+                    href="home.php?pages=includes/deleteUsuario.php&id=<?php echo $idUsuario; ?>"
                     class="btn btn-danger btn-sm"><i class="bi bi-x-octagon"></i></a>
 
 
@@ -288,7 +264,8 @@ $resultado = mysqli_query($conn, $buscar_usuarios);
         <?php } ?>
     </tbody>
     <tfoot>
-        <tr>
+        <tr class="text-center bg-dark text-light">
+            <th scope="col">ID</th>
             <th scope="col">Nome</th>
             <th scope="col">Apelido</th>
             <th scope="col">Data de Nascimento</th>

@@ -18,6 +18,12 @@
                         <!-- <li><a href="home.php?pages=usuarios.php" class="dropdown-item">
                                         <i class="bi bi-people-fill"></i> Usuarios</a></li> -->
 
+                        <?php if ($_SESSION['tipoUsuario'] == 1) {
+                            echo '
+                                    <li><a href="home.php?pages=usuarios.php" class="dropdown-item">
+                                        <i class="bi bi-people-fill"></i> Usuarios</a></li>';
+                        } ?>
+
 
                         <li><a href="home.php?pages=visitaTecnica.php" class="dropdown-item">
 
@@ -147,7 +153,7 @@
                     <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown">
                         <?php echo $_SESSION['apelidoUsuario']; ?> </a>
                     <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a class="dropdown-item" href=" #">
+                        <li><a class="dropdown-item" href="home.php?pages=perfil.php">
                                 <i class="bi bi-person-lines-fill"></i>
                                 &nbsp; &nbsp; Perfil</a>
                         </li>
@@ -157,7 +163,7 @@
                             </a></li>
                         <li><a class="dropdown-item mb-3" href="#"><i class="fas fa-user"></i>&nbsp;
                                 &nbsp; Menu</a></li>
-                        <li><a class="dropdown-item border-top" href="includes/logout.php">
+                        <li><a class="dropdown-item border-top text-danger" href="includes/logout.php">
                                 <i class="bi bi-door-open-fill"></i>
                                 &nbsp;&nbsp; Sair</a></li>
                     </ul>

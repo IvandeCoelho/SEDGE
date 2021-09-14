@@ -1,9 +1,9 @@
-<h1 class="h1 text-center">Visita Tecnica</h1>
+<h1 class="h1 text-center my-3">Visita Tecnica</h1>
 <table class="table table-striped table-bordered table-hover">
     <thead class="table-dark text-center">
         <th>Evento</th>
-        <th>Responsável</th>
-        <th>Inicio</th>
+        <th>Data</th>
+        <th>Público-alvo</th>
         <th>Coordenador</th>
         <th>Vagas</th>
         <th>Local</th>

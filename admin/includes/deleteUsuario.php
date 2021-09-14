@@ -1,12 +1,10 @@
 <?php
+$idUsuario = mysqli_real_escape_string($conn, $_GET['id']);
 
-$id_usu = mysqli_real_escape_string($conn, $_GET['id']);
+$deleta = mysqli_query($conn, "DELETE FROM usuarios WHERE idUsuario = '$idUsuario'");
 
-$sql = "DELETE FROM usuarios WHERE id_usu = '$id_usu'";
-$apagar = mysqli_query($conn, $sql);
 
-if ($apagar) {
-
+if ($deleta) {
     echo '<script type="text/javascript">
 alert("Registro deletado com sucesso!");
 window.location = "home.php?pages=usuarios.php";

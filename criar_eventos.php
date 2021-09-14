@@ -1,9 +1,9 @@
 <style>
-    td:hover {
-        cursor: pointer;
-    }
+td:hover {
+    cursor: pointer;
+}
 </style>
-<h1 class="h1 text-center">Novo Evento</h1>
+<h1 class="h1 text-center my-3">Novo Evento</h1>
 
 <div class="row">
     <div class="col-lg-8 mx-auto">
@@ -23,11 +23,11 @@
                 $replacement = '$1.$2.$3-$4';
                 while ($dado = mysqli_fetch_array($result)) {
                 ?>
-                    <tr>
-                        <td><?php echo $dado['nome_usu']; ?></td>
-                        <td class="text-center"><?php echo preg_replace($pattern, $replacement, $dado['cpf_usu']); ?></td>
-                        <td><?php echo $dado['email_usu']; ?></td>
-                    </tr>
+                <tr>
+                    <td><?php echo $dado['nome_usu']; ?></td>
+                    <td class="text-center"><?php echo preg_replace($pattern, $replacement, $dado['cpf_usu']); ?></td>
+                    <td><?php echo $dado['email_usu']; ?></td>
+                </tr>
 
                 <?php } ?>
             </tbody>
@@ -64,7 +64,8 @@
             </div>
 
             <div class="form-floating mb-3">
-                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                    style="height: 100px"></textarea>
                 <label for="floatingTextarea2">Descrição (<i class="small">280 caractere</i>)</label>
             </div>
 

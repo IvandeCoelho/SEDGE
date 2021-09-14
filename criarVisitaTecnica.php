@@ -3,9 +3,9 @@ td:hover {
     cursor: pointer;
 }
 </style>
-<h1 class="h1 text-center">Nova Visita Tecnica</h1>
+<h1 class="h1 text-center my-3">Nova Visita Tecnica</h1>
 
-<form action="includes/validaVt.php" method="post">
+<form action="includes/validaVt.php" method="post" enctype="multipart/form-data">
 
     <div class="accordion mb-3" id="accordionFlushExample">
         <div class="accordion-item">

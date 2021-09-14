@@ -1,4 +1,4 @@
-<h1 class="h1 text-center">Eventos Disponíveis</h1>
+<h1 class="h1 text-center my-3">Eventos Disponíveis</h1>
 
 
 <div class="row row-cols-1 row-cols-md-4 g-4">

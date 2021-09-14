@@ -28,72 +28,84 @@ $fkVeiculo = mysqli_real_escape_string($conn, $_POST['veiculo']);
 $fkAcompanhante1      = mysqli_real_escape_string($conn, $_POST['nomeAcompanhante1']);
 $fkAcompanhante2      = mysqli_real_escape_string($conn, $_POST['nomeAcompanhante2']);
 /*
-$programacaoVt = mysqli_real_escape_string($conn, $_POST['programacaoVt']);
-$imgCapaVt = mysqli_real_escape_string($conn, $_POST['imgCapaVt']);
-$imgBannerVt = mysqli_real_escape_string($conn, $_POST['imgBannerVt']);
+$programacaoVt = mysqli_real_escape_string($conn, $_FILES['programacaoVt']);
+$imgCapaVt = mysqli_real_escape_string($conn, $_FILES['imgCapaVt']);
+$imgBannerVt = mysqli_real_escape_string($conn, $_FILES['imgBannerVt']);
 */
 
 # ------------------------------------------------------------------
-$sql = "INSERT INTO visitastecnicas(
-    idVt,
-    nomeVt,
-    qntAlunosVt,
-    fkCurso,
-    justificativaVt,
-    localVt,
-    contatoLocalvt,
-    cidadeVt,
-    ufVt,
-    dataVt,
-    telefoneLocalVt,
-    fax,
-    emailVt,
-    programacaoVt,
-    imgCapaVt,
-    imgBannerVt,
-    fkResponsavel,
-    fkAcompanhante1,
-    fkAcompanhante2,
-    fkVeiculo,
-    solicitacoesVt
-)
-VALUES(
-    DEFAULT,
-    '$nomeVt',
-    '$qntAlunosVt',
-    '$fkCurso',
-    '$justificativaVt',
-    '$localVt',
-    '$contatoLocalvt',
-    '$cidadeVt',
-    '$ufVt',
-    '$dataVt',
-    '$telefoneLocalVt',
-    '$fax',
-    '$emailVt',
-    DEFAULT,
-    DEFAULT,
-    DEFAULT,
-    '$fkResponsavel',
-    '$fkAcompanhante1',
-    '$fkAcompanhante2',
-    '$fkVeiculo',
-    '$solicitacoesVt'
-)";
 
-$sqlExe = mysqli_query($conn, $sql);
+# fazer upload do banner e da imagem de capa, criar as img padroes e ver o padrao da programação se vazio
+# ver se realmente a programação se trata de um pdf ver tamanho do arquivo se 
 
-if ($sqlExe) {
-    $_SESSION['msn'] = '<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-        Visita <strong>criada</strong> com sucesso!
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>';
-    echo 'sucesso';
-    header('Location:../home.php?pages=visitaTecnica.php');
-} else {
-    $_SESSION['msn'] = '<div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
-        <strong>Desculpe</strong> algo deu errado!
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>';
-    header('Location:../home.php?pages=visitaTecnica.php');
+if (isset($_FILES['programacaoVt'])) { // ver pras img tbm
+    $extensao = strtolower(substr($_FILES['programacaoVt']['name'], -4)); //pega a extensao do arquivo
+    $novo_nome = md5(time()) . $extensao; //define o nome do arquivo
+    $diretorio = 'upload/'; //define o diretorio para onde enviaremos o arquivo
+
+    move_uploaded_file($_FILES['programacaoVt']['tmp_name'], $diretorio . $novo_nome); //efetua o upload
+
+    $sql = "INSERT INTO visitastecnicas(
+        idVt,
+        nomeVt,
+        qntAlunosVt,
+        fkCurso,
+        justificativaVt,
+        localVt,
+        contatoLocalvt,
+        cidadeVt,
+        ufVt,
+        dataVt,
+        telefoneLocalVt,
+        fax,
+        emailVt,
+        programacaoVt,
+        imgCapaVt,
+        imgBannerVt,
+        fkResponsavel,
+        fkAcompanhante1,
+        fkAcompanhante2,
+        fkVeiculo,
+        solicitacoesVt
+    )
+    VALUES(
+        DEFAULT,
+        '$nomeVt',
+        '$qntAlunosVt',
+        '$fkCurso',
+        '$justificativaVt',
+        '$localVt',
+        '$contatoLocalvt',
+        '$cidadeVt',
+        '$ufVt',
+        '$dataVt',
+        '$telefoneLocalVt',
+        '$fax',
+        '$emailVt',
+        '$novo_nome',
+        DEFAULT,
+        DEFAULT,
+        '$fkResponsavel',
+        '$fkAcompanhante1',
+        '$fkAcompanhante2',
+        '$fkVeiculo',
+        '$solicitacoesVt'
+    )";
+
+    $sqlExe = mysqli_query($conn, $sql);
+
+    if ($sqlExe) {
+        $_SESSION['msn'] = '<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            Visita <strong>criada</strong> com sucesso!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>';
+        echo 'sucesso';
+        header('Location:../home.php?pages=visitaTecnica.php');
+    } else {
+        $_SESSION['msn'] = '<div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+            <strong>Desculpe</strong> algo deu errado!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>';
+        header('Location:../home.php?pages=visitaTecnica.php');
+    }
 }
