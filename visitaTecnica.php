@@ -1,16 +1,25 @@
-<!-- Estilo da pagina -->
-<script src="includes/datatables/jquery-3.5.1.js"></script>
-<script src="includes/datatables/jquery.dataTables.min.js"></script>
-<script src="includes/datatables/dataTables.bootstrap5.min.js"></script>
+<!-- Datatables -->
 
-<link rel="stylesheet" href="includes/datatables/css/bootstrap.min.css">
-<link rel="stylesheet" href="includes/datatables/css/dataTables.bootstrap5.min.css">
 
+<script src="includes/datatables/js/jquery-3.5.1.js"></script>
+<script src="includes/datatables/js/jquery.dataTables.min.js"></script>
+<script src="includes/datatables/js/dataTables.buttons.min.js"></script>
+<script src="includes/datatables/js/jszip.min.js"></script>
+<script src="includes/datatables/js/pdfmake.min.js"></script>
+<script src="includes/datatables/js/vfs_fonts.js"></script>
+<script src="includes/datatables/js/buttons.html5.min.js"></script>
+<script src="includes/datatables/js/buttons.print.min.js"></script>
+
+<link rel="stylesheet" href="includes/datatables/css/buttons.dataTables.min.css">
+<link rel="stylesheet" href="includes/datatables/css/jquery.dataTables.min.css">
 
 <script>
 $(document).ready(function() {
     $('#example').DataTable({
-
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
         language: {
             "emptyTable": "Nenhum registro encontrado",
             "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -192,11 +201,11 @@ $(document).ready(function() {
                 }
             },
             "decimal": ","
+
         }
     });
 });
 </script>
-
 
 <?php
 $sql = "SELECT v.idVt, v.nomeVt, v.dataVt, c.nomeCurso, u.nomeUsuario, v.qntAlunosVt, v.cidadeVt, v.ufVt FROM visitastecnicas v INNER JOIN cursos c ON v.fkCurso = c.idCurso INNER JOIN usuarios u ON v.fkResponsavel = u.idUsuario";
@@ -204,7 +213,7 @@ $exeSql = mysqli_query($conn, $sql);
 ?>
 <h1 class="h1 text-center my-3">Visita Tecnica</h1>
 <table id="example" class="table table-striped table-bordered table-hover">
-    <thead class="table-dark text-center">
+    <thead class="text-center">
         <th>Data</th>
         <th>Cidade</th>
         <th>Local</th>

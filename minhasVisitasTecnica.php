@@ -1,16 +1,25 @@
-<!-- Estilo da pagina -->
-<script src="includes/datatables/jquery-3.5.1.js"></script>
-<script src="includes/datatables/jquery.dataTables.min.js"></script>
-<script src="includes/datatables/dataTables.bootstrap5.min.js"></script>
+<!-- Datatables -->
 
-<link rel="stylesheet" href="includes/datatables/css/bootstrap.min.css">
-<link rel="stylesheet" href="includes/datatables/css/dataTables.bootstrap5.min.css">
 
+<script src="includes/datatables/js/jquery-3.5.1.js"></script>
+<script src="includes/datatables/js/jquery.dataTables.min.js"></script>
+<script src="includes/datatables/js/dataTables.buttons.min.js"></script>
+<script src="includes/datatables/js/jszip.min.js"></script>
+<script src="includes/datatables/js/pdfmake.min.js"></script>
+<script src="includes/datatables/js/vfs_fonts.js"></script>
+<script src="includes/datatables/js/buttons.html5.min.js"></script>
+<script src="includes/datatables/js/buttons.print.min.js"></script>
+
+<link rel="stylesheet" href="includes/datatables/css/buttons.dataTables.min.css">
+<link rel="stylesheet" href="includes/datatables/css/jquery.dataTables.min.css">
 
 <script>
 $(document).ready(function() {
     $('#example').DataTable({
-
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
         language: {
             "emptyTable": "Nenhum registro encontrado",
             "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -192,6 +201,7 @@ $(document).ready(function() {
                 }
             },
             "decimal": ","
+
         }
     });
 });
@@ -237,13 +247,15 @@ $exeSql = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($exeSql) > 0) { ?>
 <table id="example" class="table table-striped table-bordered table-hover my-3">
-    <thead class="table-dark text-center">
-        <th>Evento</th>
+    <thead class="text-center">
         <th>Data</th>
+        <th>Cidade</th>
         <th>Local</th>
         <th>Responsável</th>
         <th>Programação</th>
         <th>Ações</th>
+
+
     </thead>
     <tbody>
         <?php
@@ -251,9 +263,9 @@ if (mysqli_num_rows($exeSql) > 0) { ?>
             ?>
 
         <tr>
-            <td><?php echo $dado['nomeVt'] ?></td>
             <td class="text-center"><?php echo date('d/m/Y', strtotime($dado['dataVt'])) ?></td>
             <td class="text-center"><?php echo $dado['cidadeVt'] . ' - ' . $dado['ufVt'] ?></td>
+            <td><?php echo $dado['nomeVt'] ?></td>
             <td class="text-center"><?php echo $dado['nomeUsuario'] ?></td>
             <td class="text-center">
 

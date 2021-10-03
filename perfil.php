@@ -65,7 +65,7 @@ $hash = md5(strtolower(trim($sqlSelectUsuario['emailUsuario'])));
         <?php
         if (isset($_GET['seguranca'])) { ?>
         <div class="row my-3">
-            <h2 class="h2">Seguraça</h2>
+            <h2 class="h2">Seguraça </h2>
             <span class="small text-danger mb-2">Alterar senha</span>
             <hr class="border border-1 border-secondary">
 
