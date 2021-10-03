@@ -47,7 +47,8 @@ if (isset($_GET['inscricao'])) {
     <div class="col">
         <div class="card">
             <!-- class h-100-->
-            <img src="includes/img/img_default.png" style="background-size: cover;" class="card-img-top" alt="...">
+            <img src="includes/img/img_default.png" class="img-thumbnail" style="background-size: cover;"
+                class="card-img-top" alt="...">
             <div class="card-body">
                 <!-- ver a possibilidade de truncar o tamanho do nome e de colocar um codigo aos eventos curso(4caractere) + id + ANO -->
                 <h5 class="card-title text-truncate"><?php echo $dado['nomeVt'] ?></h5>
