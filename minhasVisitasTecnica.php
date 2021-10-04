@@ -271,7 +271,7 @@ if (mysqli_num_rows($exeSql) > 0) { ?>
 
                 <!-- fazer uma consulta pra verificar se ha uma programação e colocar um retorno -->
 
-                <a href="includes/upload/<?php echo $dado['programacaoVt'] ?>" target="_blank"
+                <a href="includes/upload/<?php echo $dado['programacaoVt'] . '.pdf' ?>" target="_blank"
                     class="btn btn-outline-primary btn-sm w-50 a.auto-start" data-bs-toggle="tooltip"
                     data-bs-placement="right" title="Download da programação" download><i
                         class="bi bi-download"></i></a>
