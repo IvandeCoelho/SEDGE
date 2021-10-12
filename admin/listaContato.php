@@ -1,4 +1,6 @@
 <!-- Datatables -->
+
+
 <script src="includes/datatables/js/jquery-3.5.1.js"></script>
 <script src="includes/datatables/js/jquery.dataTables.min.js"></script>
 <script src="includes/datatables/js/dataTables.buttons.min.js"></script>
@@ -207,184 +209,44 @@ $(document).ready(function() {
 
 
 <?php
+//DATA ATUAL
+$dataAtual = date('Y-m-d');
 //BUSCAR TODOS OS USUÁRIOS CADASTRADOS
-$sqlConsulta = "SELECT
-veiculos.idVeiculo, veiculos.modeloVeiculo, veiculos.placaVeiculo,fabricante.nomeFabricante AS fabricante
-FROM veiculos JOIN fabricante
-ON veiculos.fkFabricante = fabricante.idFabricante;";
-#$buscar_usuarios = "SELECT * FROM veiculos";
-$resultado = mysqli_query($conn, $sqlConsulta);
+$sqlSelectUsuario = mysqli_query($conn, "SELECT * FROM usuarios JOIN nivelusuario ON usuarios.fkNivelUsuario = nivelusuario.idNivelUsuario");
 ?>
-<h1 class="h1 text-center py-3">Frota</h1>
-
-<?php
-if (isset($_SESSION['msn'])) {
-    echo $_SESSION['msn'];
-    unset($_SESSION['msn']);
-}
-#create
-if (isset($_GET['create'])) {
-?>
-<form action="includes/criarEditaVeiculos.php" method="post">
-    <div class="row g-3 mb-3">
-        <span class="text-danger">*preencha todos os campos</span>
-        <div class="col-md">
-            <div class="form-floating">
-                <input type="text" class="form-control" id="floatingInputGrid" placeholder="Modelo veiculo"
-                    name="modeloVeiculo" required>
-                <label for="floatingInputGrid">Modelo veiculo</label>
-            </div>
-        </div>
-
-        <div class="col-md">
-            <div class="form-floating">
-                <input type="text" class="form-control" id="floatingInputGrid2" placeholder="Placa veiculo"
-                    name="placaVeiculo" required>
-                <label for=" floatingInputGrid2">Placa veiculo</label>
-            </div>
-        </div>
 
 
-        <div class="col-md">
-            <div class="form-floating">
-
-                <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example"
-                    name="fkFabricante" required>
-                    <option selected disabled> Selecione a fabricante</option>
-                    <?php
-                        $sqlConsulaFabricante = mysqli_query($conn, "SELECT * FROM fabricante ORDER BY fabricante.nomeFabricante ASC");
-                        if ($sqlConsulaFabricante) {
-                            while ($rowFabricante = mysqli_fetch_array($sqlConsulaFabricante)) {
-                        ?>
-                    <option value="<?php echo $rowFabricante['idFabricante'] ?>">
-                        <?php echo $rowFabricante['nomeFabricante'] ?></option>
-                    <?php
-                            }
-                        }
-                        ?>
-                </select>
-                <label for="floatingSelectGrid">Fabricante</label>
-            </div>
-        </div>
-    </div>
-    <input type="submit" value="CADASTRAR" class="btn btn-success btn-sm w-100" name="create">
-</form>
-<?php
-
-    #editando
-} elseif (isset($_GET['edit'])) {
-    $id = $_GET['edit'];
-    $sqlConsulta = mysqli_query($conn, "SELECT * FROM veiculos WHERE idVeiculo = '$id'");
-    while ($dado = mysqli_fetch_array($sqlConsulta)) {
-    ?>
-<form action="includes/criarEditaVeiculos.php" method="post">
-    <div class="row g-3 mb-3">
-        <span class="text-danger">*preencha todos os campos</span>
-        <input type="hidden" name="id" value="<?php echo $id ?>">
-        <div class="col-md">
-            <div class="form-floating">
-                <input type="text" class="form-control" id="floatingInputGrid" placeholder="Modelo veiculo"
-                    name="modeloVeiculo" value="<?php echo $dado['modeloVeiculo'] ?>" required>
-                <label for="floatingInputGrid">Modelo veiculo</label>
-            </div>
-        </div>
-
-        <div class="col-md">
-            <div class="form-floating">
-                <input type="text" class="form-control" id="floatingInputGrid2" placeholder="Placa veiculo"
-                    name="placaVeiculo" value="<?php echo $dado['placaVeiculo'] ?>" required>
-                <label for="floatingInputGrid2">Placa veiculo</label>
-            </div>
-        </div>
-
-
-        <div class="col-md">
-            <div class="form-floating">
-
-                <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example"
-                    name="fkFabricante" required>
-                    <option selected disabled> Selecione a fabricante</option>
-                    <?php
-                            $sqlConsulaFabricante = mysqli_query($conn, "SELECT * FROM fabricante ORDER BY fabricante.nomeFabricante ASC");
-                            if ($sqlConsulaFabricante) {
-                                while ($rowFabricante = mysqli_fetch_array($sqlConsulaFabricante)) {
-                            ?>
-                    <option value="<?php echo $rowFabricante['idFabricante'] ?>">
-                        <?php echo $rowFabricante['nomeFabricante'] ?></option>
-                    <?php
-                                }
-                            }
-                            ?>
-                </select>
-                <label for="floatingSelectGrid">Fabricante</label>
-            </div>
-        </div>
-    </div>
-    <input type="submit" value="ATUALIZAR" class="btn btn-success btn-sm w-100" name="edit">
-
-</form>
-
-<?php }
-} else { ?>
+<h1 class="h1 text-center py-3">Lista de contato</h1>
 
 <table id="example" class="table table-striped table-hover table-bordered">
     <thead class="text-center">
-        <tr>
+        <tr class="text-center">
             <th scope="col">ID</th>
-            <th scope="col">Placa</th>
-            <th scope="col">Modelo</th>
-            <th scope="col">Fabricante</th>
-            <th scope="col">Ações</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Contato</th>
+            <th scope="col">Email</th>
         </tr>
     </thead>
     <tbody>
 
         <?php
-            while ($rows = mysqli_fetch_array($resultado)) {
-            ?>
-
+        while ($dado = mysqli_fetch_assoc($sqlSelectUsuario)) {
+        ?>
         <tr>
-            <th class="text-center"><?php echo $rows['idVeiculo']; ?></th>
-            <td class="text-center">
-                <span class="btn btn-sm btn-outline-dark">
-                    <strong>
-                        <?php echo $rows['placaVeiculo']; ?>
-                    </strong>
-                </span>
-            </td>
-            <td><?php echo $rows['modeloVeiculo']; ?></td>
-            <td><?php echo $rows['fabricante']; ?></td>
-
-            <td class="d-flex justify-content-around">
-
-                <a href="home.php?pages=frota.php&edit=<?php echo $rows['idVeiculo']; ?>" class="btn btn-warning btn-sm"
-                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Editar">
-                    <i class="bi bi-pencil-square"></i>
-                </a>
-
-                <a href="includes/delVeiculos.php?del=<?php echo $rows['idVeiculo']; ?>" class="btn btn-danger btn-sm"
-                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Editar"
-                    onclick="return confirm('Deseja excluir o veiculo: <?php echo $rows['modeloVeiculo'] . ' - ' . $rows['placaVeiculo'] ?>?');">
-                    <i class="bi bi-x-octagon"></i>
-                </a>
-
-            </td>
+            <th class="text-center"><?php echo $dado['idUsuario']; ?></th>
+            <td class=""><?php echo $dado['nomeUsuario']; ?></td>
+            <td class="text-center"><?php echo $dado['whatsappUsuario']; ?></td>
+            <td class="text-center"><?php echo $dado['emailUsuario']; ?></td>
 
         </tr>
         <?php } ?>
     </tbody>
     <tfoot>
-        <tr>
+        <tr class="text-center">
             <th scope="col">ID</th>
-            <th scope="col">Placa</th>
-            <th scope="col">Modelo</th>
-            <th scope="col">Fabricante</th>
-            <th scope="col">Ações</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Apelido</th>
+            <th scope="col">Email</th>
         </tr>
     </tfoot>
 </table>
-
-<a href="home.php?pages=frota.php&create=" class="btn btn-success btn-sm mb-3" name="create">
-    NOVO <i class="bi bi-plus-circle"></i>
-</a>
-<?php } ?>

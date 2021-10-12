@@ -1,8 +1,5 @@
 <?php
-if (
-    ($_SESSION['tipoUsuario'] <> 1)
-) {
-
+if ($_SESSION['tipoUsuario'] <> 1) {
     unset(
         $_SESSION['idUsuario'],
         $_SESSION['nomeUsuario'],

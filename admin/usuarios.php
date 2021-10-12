@@ -212,8 +212,164 @@ $(document).ready(function() {
 //DATA ATUAL
 $dataAtual = date('Y-m-d');
 //BUSCAR TODOS OS USUÁRIOS CADASTRADOS
-$buscarUsuarioarios = mysqli_query($conn, "SELECT * FROM usuarios JOIN nivelusuario ON usuarios.fkNivelUsuario = nivelusuario.idNivelUsuario");
+$sqlSelectUsuario = mysqli_query($conn, "SELECT * FROM usuarios JOIN nivelusuario ON usuarios.fkNivelUsuario = nivelusuario.idNivelUsuario");
 ?>
+
+
+<?php
+if (isset($_GET['privilegio'])) {
+    $id = $_GET['privilegio'];
+    $sqlSelectUsuario = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM usuarios JOIN nivelusuario ON usuarios.fkNivelUsuario = nivelusuario.idNivelUsuario WHERE idUsuario = '$id'"));
+    $hash = md5(strtolower(trim($sqlSelectUsuario['emailUsuario'])));
+?>
+<h1 class="h1 text-center py-3">Promover usuario</h1>
+<div class="row">
+    <div class="col-md-3">
+        <div class="text-center">
+            <img class="rounded-circle mx-auto m-2" src="https://www.gravatar.com/avatar/<?php echo $hash ?>?s=256"
+                style="max-width:100%" alt="perfil_gravatar" onerror="this.src='includes/img/perfil_default.png'">
+            <div class="d-flex justify-content-center ">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <header ader class="row py-3">
+            <span class="d-flex justify-content-between">
+                <h3 class="h3">
+                    <?php echo $sqlSelectUsuario['nomeUsuario'] ?>
+                </h3> <a href="home.php?pages=usuarios.php" type="button" class="btn-close" aria-label="Close"></a>
+            </span>
+            <span class="my-2">
+                <a href="mailto:<?php echo $sqlSelectUsuario['emailUsuario'] ?>" target="_blank"
+                    class="bg-warning rounded-pill text-dark p-1 px-3 text-decoration-none"><i
+                        class="bi bi-envelope"></i> <?php echo $sqlSelectUsuario['emailUsuario'] ?></a>
+                -
+                <a class="bg-success rounded-pill text-light p-1 px-3 text-decoration-none"
+                    href="https://api.whatsapp.com/send?phone=5588999005210&text=" title="Whatsapp" target="_blank"><i
+                        class="bi bi-whatsapp"></i>
+                    <?php echo $sqlSelectUsuario['whatsappUsuario'] ?></a>
+                -
+                <span class="bg-primary rounded-pill text-light p-1 px-3 text-decoration-none">
+                    <?php echo $sqlSelectUsuario['nivelUsuario'] ?></a>
+                </span>
+            </span>
+            <div class="col-md">
+                <div class=" my-2 p-2 rounded" style="background-color: #e9ecef;">
+                    Avatar gerado por <strong>
+                        <a class="text-secondary" href="https://br.gravatar.com/" target="_blank">Gravatar.com</a>
+                    </strong>
+                </div>
+            </div>
+            <div class="my-3">
+                <form action="includes/validaUsuarios.php" method="post">
+                    <input type="hidden" name="id" id="" value="<?php echo $sqlSelectUsuario['idUsuario'] ?>">
+
+
+
+                    <div class="col-md mb-3">
+                        <div class="form-floating">
+                            <select class="form-select" id="floatingSelectGrid"
+                                aria-label="Floating label select example" name="nivel">
+                                <option selected>Selecione o novo nivel</option>
+
+                                <?php
+                                    $sqlSelectNivel = mysqli_query($conn, "SELECT * FROM nivelusuario");
+                                    while ($dado = mysqli_fetch_array($sqlSelectNivel)) { ?>
+
+                                <option value="<?php echo   $dado['idNivelUsuario']; ?>">
+                                    <?php echo   $dado['nivelUsuario']; ?></option>
+                                <?php } ?>
+                            </select>
+                            <label for="floatingSelectGrid">Promover este usuario</label>
+                        </div>
+                    </div>
+
+                    <input class="btn btn-success btn-lg w-100" type="submit" name="alterarnivel"
+                        value="PROMOVER USUARIO">
+                </form>
+                <span class="d-block m-3 small" style="color:red;"></span>
+            </div>
+        </header>
+    </div>
+</div>
+<?php
+    if (isset($_SESSION['msn'])) {
+        echo $_SESSION['msn'];
+        unset($_SESSION['msn']);
+    }
+    ?>
+
+<?php
+} elseif (isset($_GET['reset'])) {
+    $id = $_GET['reset'];
+    $sqlSelectUsuario = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM usuarios JOIN nivelusuario ON usuarios.fkNivelUsuario = nivelusuario.idNivelUsuario WHERE idUsuario = '$id'"));
+    $hash = md5(strtolower(trim($sqlSelectUsuario['emailUsuario'])));
+?>
+
+<h1 class="h1 text-center py-3">Resetar senha do usuario</h1>
+<div class="row">
+    <div class="col-md-3">
+        <div class="text-center">
+            <img class="rounded-circle mx-auto m-2" src="https://www.gravatar.com/avatar/<?php echo $hash ?>?s=256"
+                style="max-width:100%" alt="perfil_gravatar" onerror="this.src='includes/img/perfil_default.png'">
+            <div class="d-flex justify-content-center ">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <header ader class="row py-3">
+            <span class="d-flex justify-content-between">
+                <h3 class="h3">
+                    <?php echo $sqlSelectUsuario['nomeUsuario'] ?>
+                </h3> <a href="home.php?pages=usuarios.php" type="button" class="btn-close" aria-label="Close"></a>
+            </span>
+            <span class="my-2">
+                <a href="mailto:<?php echo $sqlSelectUsuario['emailUsuario'] ?>" target="_blank"
+                    class="bg-warning rounded-pill text-dark p-1 px-3 text-decoration-none"><i
+                        class="bi bi-envelope"></i> <?php echo $sqlSelectUsuario['emailUsuario'] ?></a>
+                -
+                <a class="bg-success rounded-pill text-light p-1 px-3 text-decoration-none"
+                    href="https://api.whatsapp.com/send?phone=5588999005210&text=" title="Whatsapp" target="_blank"><i
+                        class="bi bi-whatsapp"></i>
+                    <?php echo $sqlSelectUsuario['whatsappUsuario'] ?></a>
+                -
+                <span class="bg-primary rounded-pill text-light p-1 px-3 text-decoration-none">
+                    <?php echo $sqlSelectUsuario['nivelUsuario'] ?></a>
+                </span>
+            </span>
+            <div class="col-md">
+                <div class=" my-2 p-2 rounded" style="background-color: #e9ecef;">
+                    Avatar gerado por <strong>
+                        <a class="text-secondary" href="https://br.gravatar.com/" target="_blank">Gravatar.com</a>
+                    </strong>
+                </div>
+            </div>
+            <div class="my-3">
+                <form action="includes/validaUsuarios.php" method="post">
+                    <input type="hidden" name="id" id="" value="<?php echo $sqlSelectUsuario['idUsuario'] ?>">
+                    <input class="btn btn-success btn-lg w-100" type="submit" name="resetarSenha"
+                        value="RESETAR SENHA DO USUARIO">
+                </form>
+                <span class="d-block m-3 small" style="color:red;">*A senhas será resetada para o CPF sem pontuação
+                    do
+                    respectivo
+                    usuarios.</span>
+            </div>
+        </header>
+    </div>
+</div>
+<?php
+    if (isset($_SESSION['msn'])) {
+        echo $_SESSION['msn'];
+        unset($_SESSION['msn']);
+    }
+    ?>
+
+<?php } elseif (isset($_GET['bloqueio'])) {
+    echo 'bloqueio logico';
+} elseif (isset($_GET['deletar'])) {
+    echo 'deletar';
+} else { ?>
 <h1 class="h1 text-center py-3">Lista de Usuarios</h1>
 
 <table id="example" class="table table-striped table-hover table-bordered">
@@ -221,8 +377,8 @@ $buscarUsuarioarios = mysqli_query($conn, "SELECT * FROM usuarios JOIN nivelusua
         <tr class="text-center">
             <th scope="col">ID</th>
             <th scope="col">Nome</th>
-            <th scope="col">Apelido</th>
             <th scope="col">D.D.N</th>
+            <th scope="col">Contato</th>
             <th scope="col">Email</th>
             <th scope="col">Tipo</th>
             <th scope="col">Ações</th>
@@ -231,42 +387,32 @@ $buscarUsuarioarios = mysqli_query($conn, "SELECT * FROM usuarios JOIN nivelusua
     <tbody>
 
         <?php
-        while ($rows = mysqli_fetch_array($buscarUsuarioarios)) {
-            $idUsuario = $rows['idUsuario'];
-            $nomeUsuario = $rows['nomeUsuario'];
-            $apelidoUsuario = $rows['apelidoUsuario'];
-            $dataNascimento = $rows['ddnUsuario'];
-            $sexo = $rows['sexoUsuario'];
-            $cpf = $rows['cpfUsuario'];
-            $endereco = $rows['enderecoUsuario'];
-            $cidade = $rows['cidadeUsuario'];
-            $cep = $rows['cepUsuario'];
-            $estado = $rows['ufUsuario'];
-            $email = $rows['emailUsuario'];
-            $nivelUsuario = $rows['nivelUsuario'];
-        ?>
-        <?php /*
-        echo "<td>" . date('d/m/Y', strtotime($dataNascimento)) . "</td>";
-        echo "<td><a href='editarUsuario.php?id=$idUsuario'><i class='fas fa-edit'></i></a> <a
-                    href='detalhesUsuarios.php?id=$idUsuario'><i class='fas fa-eye'></i></a> <a href=''><i
-                        class='fas fa-trash-alt'></i></a></td>";
-        echo "</tr>"; */
+            while ($dado = mysqli_fetch_assoc($sqlSelectUsuario)) {
             ?>
         <tr>
-            <th class="text-center"><?php echo $idUsuario; ?></th>
-            <td><?php echo $nomeUsuario; ?></td>
-            <td><?php echo $apelidoUsuario; ?></td>
-            <td class="text-center"><?php echo date('d/m/Y', strtotime($dataNascimento)); ?></td>
-            <td><?php echo $email; ?></td>
-            <td><?php echo $nivelUsuario; ?></td>
-            <td class="d-flex justify-content-around">
-                <a href="home.php?pages=editUsuario.php&id=<?php echo $idUsuario; ?>" class="btn btn-warning btn-sm"
-                    name="edit"><i class="bi bi-pencil-square"></i></a>
+            <th class="text-center"><?php echo $dado['idUsuario']; ?></th>
+            <td class="text-nowrap"><?php echo $dado['nomeUsuario']; ?></td>
+            <td class="text-center text-nowrap"><?php echo date('d/m/Y', strtotime($dado['ddnUsuario'])); ?></td>
+            <td class="text-center text-nowrap"><?php echo $dado['whatsappUsuario']; ?></td>
+            <td class="text-center text-nowrap"><?php echo $dado['emailUsuario']; ?></td>
+            <td><?php echo $dado['nivelUsuario']; ?></td>
+            <td class="d-flex justify-content-around gap-1  flex-nowrap">
 
-                <a onclick="return confirm('Deseja deletar o usuario: <?php echo $idUsuario . ' - ' .  $apelidoUsuario; ?>?')"
-                    href="home.php?pages=includes/deleteUsuario.php&id=<?php echo $idUsuario; ?>"
-                    class="btn btn-danger btn-sm"><i class="bi bi-x-octagon"></i></a>
+                <a href="home.php?pages=usuarios.php&privilegio=<?php echo $dado['idUsuario']; ?>"
+                    class="btn btn-warning btn-sm" name="edit" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                    title="Privilégios"> <i class="bi bi-tools"></i></a>
 
+                <a href="home.php?pages=usuarios.php&reset=<?php echo $dado['idUsuario']; ?>" class="
+                    btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="bottom" title="reset senha"><i
+                        class="bi bi-arrow-repeat"></i></a>
+
+                <a href="home.php?pages=usuarios.php&bloqueio=<?php echo $dado['idUsuario']; ?>"
+                    class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                    title="bloqueio"><i class="bi bi-lock"></i></a>
+
+                <a href="home.php?pages=usuarios.php&deletar=<?php echo $dado['idUsuario']; ?>"
+                    class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Deletar"><i
+                        class="bi bi-x-octagon"></i></a>
 
             </td>
 
@@ -285,43 +431,9 @@ $buscarUsuarioarios = mysqli_query($conn, "SELECT * FROM usuarios JOIN nivelusua
         </tr>
     </tfoot>
 </table>
-
-
-<a href="cadastraUsuario.php" class="btn btn-success btn-lg mt-3"><i class="bi bi-person-plus-fill"></i> CADASTRAR
+<a href="cadastraUsuario.php" class="btn btn-success btn-lg mt-3"><i class="bi bi-person-plus-fill"></i>
+    CADASTRAR
     USUARIO</a>
-
-
-<!-- Toast -->
 <?php
-if (isset($_SESSION['cad-msn'])) {
-    echo $_SESSION['cad-msn'];
-    unset($_SESSION['cad-msn']);
 }
 ?>
-<div class="toast border-2 position-absolute bottom-0 end-0 m-2" role="alert" aria-live="assertive" aria-atomic="true"
-    id="EpicToast">
-    <div class="toast-header bg-warning text-dark">
-        <i class="bi bi-exclamation-triangle-fill me-2"></i>
-        <strong class="me-auto">Atenção</strong>
-        <small>2 segundos</small>
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-    <div class="toast-body text-dark">
-        Erro ao deletar!
-    </div>
-</div>
-
-
-
-<!-- js das caixas de msn -->
-<script>
-var option = {
-    animation: true,
-    delay: 2000
-};
-
-var toastHTMLElement = document.getElementById('EpicToast');
-var toastElement = new bootstrap.Toast(toastHTMLElement, option);
-
-toastElement.show();
-</script>

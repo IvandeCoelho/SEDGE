@@ -42,7 +42,7 @@ CMYK 48 0 100 1
 <body class="bg-light">
 
     <header class="bg-ifce bg-dark px-5">
-        <?php include_once('../includes/menu.php') ?>
+        <?php include_once('includes/menuAdm.php') ?>
     </header>
 
     <section>

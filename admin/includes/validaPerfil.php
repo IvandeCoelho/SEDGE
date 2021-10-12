@@ -1,5 +1,5 @@
 <?php
-include_once('conexao.php');
+include_once('../../includes/conexao.php');
 session_start();
 $idUsuario = $_POST['idUsuario'];
 $sqlConsulta = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM usuarios WHERE idUsuario = '$idUsuario'"));
