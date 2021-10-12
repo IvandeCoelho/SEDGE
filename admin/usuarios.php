@@ -400,7 +400,7 @@ if (isset($_GET['privilegio'])) {
 
                 <a href="home.php?pages=usuarios.php&privilegio=<?php echo $dado['idUsuario']; ?>"
                     class="btn btn-warning btn-sm" name="edit" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                    title="Privilégios"> <i class="bi bi-tools"></i></a>
+                    title="Promover"> <i class="bi bi-tools"></i></a>
 
                 <a href="home.php?pages=usuarios.php&reset=<?php echo $dado['idUsuario']; ?>" class="
                     btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="bottom" title="reset senha"><i

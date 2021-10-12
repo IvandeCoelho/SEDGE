@@ -2,7 +2,7 @@
 
 <?php
 $idUsuario = $_SESSION['idUsuario'];
-$sqlSelectUsuario = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM usuarios WHERE idUsuario = '$idUsuario'"));
+$sqlSelectUsuario = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM usuarios JOIN nivelusuario WHERE idUsuario = '$idUsuario'"));
 #hash gravatar
 $hash = md5(strtolower(trim($sqlSelectUsuario['emailUsuario'])));
 ?>
@@ -62,7 +62,9 @@ $hash = md5(strtolower(trim($sqlSelectUsuario['emailUsuario'])));
                     class="bg-warning rounded-pill text-dark p-1 px-3 text-decoration-none"><i
                         class="bi bi-envelope"></i> <?php echo $sqlSelectUsuario['emailUsuario'] ?></a>
                 -
-                <span class="text-primary"><?php include_once('../includes/return_type.php'); ?></span>
+                <span class="text-primary">
+                    <?php echo $sqlSelectUsuario['nivelUsuario'] ?>
+                </span>
             </span>
             <div class="m-2 p-2 rounded" style="background-color: #e9ecef;">
                 Avatar gerado por <strong>

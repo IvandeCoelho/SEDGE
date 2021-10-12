@@ -3,28 +3,41 @@ session_start();
 include_once("conexao.php");
 include_once("security.php");
 
-$email = $_POST['email'];
-$pass = $_POST['pass'];
-$escaped_email =  mysqli_real_escape_string($conn, $email);
-$escaped_pass =  md5(md5(mysqli_real_escape_string($conn, $pass)));
+$email =  mysqli_real_escape_string($conn, $_POST['email']);
+$senha =  md5(md5(mysqli_real_escape_string($conn, $_POST['pass'])));
 
+$sqlLogar = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM usuarios WHERE emailUsuario = '$email' AND senhaUsuario = '$senha'"));
 
-$logando = "SELECT * FROM usuarios WHERE emailUsuario = '$escaped_email' AND senhaUsuario = '$escaped_pass' ";
-$result = mysqli_query($conn, $logando);
-
-if (empty($resultado = mysqli_fetch_assoc($result))) {
-  $_SESSION['login_erro'] = '<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+if (empty($sqlLogar)) {
+  $_SESSION['msn'] = '<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
     <strong>Atenção!</strong> Seu email e/ou senha estão incorretos!
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>';
   header("Location:../index.php");
 } else {
-  $_SESSION['idUsuario'] = $resultado['idUsuario'];
-  $_SESSION['nomeUsuario'] = $resultado['nomeUsuario'];
-  $_SESSION['apelidoUsuario'] = $resultado['apelidoUsuario'];
-  $_SESSION['emailUsuario'] = $resultado['emailUsuario'];
-  $_SESSION['senhaUsuario'] = $resultado['senhaUsuario'];
-  $_SESSION['tipoUsuario'] = $resultado['fkNivelUsuario'];
+  $cpf = md5(md5(str_replace('.', '', str_replace('-', '', $sqlLogar['cpfUsuario']))));
+  if ($senha == $cpf) {
 
-  header("Location: ../../sedge/home.php");
+    $_SESSION['idUsuario']      = $sqlLogar['idUsuario'];
+    $_SESSION['nomeUsuario']    = $sqlLogar['nomeUsuario'];
+    $_SESSION['apelidoUsuario'] = $sqlLogar['apelidoUsuario'];
+    $_SESSION['emailUsuario']   = $sqlLogar['emailUsuario'];
+    $_SESSION['senhaUsuario']   = $sqlLogar['senhaUsuario'];
+    $_SESSION['tipoUsuario']    = $sqlLogar['fkNivelUsuario'];
+
+    $_SESSION['msn'] = '<div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+    <strong>Atenção!</strong> sua senha foi redefinida por um administrador! <br>
+    Altere sua senha!
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>';
+    header("Location: ../home.php?pages=perfil.php&seguranca");
+  } else {
+    $_SESSION['idUsuario']      = $sqlLogar['idUsuario'];
+    $_SESSION['nomeUsuario']    = $sqlLogar['nomeUsuario'];
+    $_SESSION['apelidoUsuario'] = $sqlLogar['apelidoUsuario'];
+    $_SESSION['emailUsuario']   = $sqlLogar['emailUsuario'];
+    $_SESSION['senhaUsuario']   = $sqlLogar['senhaUsuario'];
+    $_SESSION['tipoUsuario']    = $sqlLogar['fkNivelUsuario'];
+    header("Location: ../home.php");
+  }
 }

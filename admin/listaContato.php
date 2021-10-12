@@ -222,9 +222,10 @@ $sqlSelectUsuario = mysqli_query($conn, "SELECT * FROM usuarios JOIN nivelusuari
     <thead class="text-center">
         <tr class="text-center">
             <th scope="col">ID</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Contato</th>
-            <th scope="col">Email</th>
+            <th scope="col"><i class="bi bi-person"></i> Nome</th>
+            <th scope="col"><i class="bi bi-telephone-forward"></i> Contato</th>
+            <th scope="col"><i class="bi bi-whatsapp"></i> WhatsApp</th>
+            <th scope="col"><i class="bi bi-envelope"></i> Email</th>
         </tr>
     </thead>
     <tbody>
@@ -235,8 +236,9 @@ $sqlSelectUsuario = mysqli_query($conn, "SELECT * FROM usuarios JOIN nivelusuari
         <tr>
             <th class="text-center"><?php echo $dado['idUsuario']; ?></th>
             <td class=""><?php echo $dado['nomeUsuario']; ?></td>
+            <td class="text-center"><?php echo $dado['contatoUsuario']; ?></td>
             <td class="text-center"><?php echo $dado['whatsappUsuario']; ?></td>
-            <td class="text-center"><?php echo $dado['emailUsuario']; ?></td>
+            <td class=""><?php echo $dado['emailUsuario']; ?></td>
 
         </tr>
         <?php } ?>
@@ -244,9 +246,10 @@ $sqlSelectUsuario = mysqli_query($conn, "SELECT * FROM usuarios JOIN nivelusuari
     <tfoot>
         <tr class="text-center">
             <th scope="col">ID</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Apelido</th>
-            <th scope="col">Email</th>
+            <th scope="col"><i class="bi bi-person"></i> Nome</th>
+            <th scope="col"><i class="bi bi-telephone-forward"></i> Contato</th>
+            <th scope="col"><i class="bi bi-whatsapp"></i> WhatsApp</th>
+            <th scope="col"><i class="bi bi-envelope"></i> Email</th>
         </tr>
     </tfoot>
 </table>
