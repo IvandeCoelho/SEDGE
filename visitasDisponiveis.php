@@ -38,7 +38,7 @@ if (isset($_GET['inscricao'])) {
 <div class="row row-cols-1 row-cols-md-4 g-2 mb-3">
     <!-- Ver responsividade -->
     <?php
-    $sql = "SELECT v.idVt, v.nomeVt,v.justificativaVt, v.dataVt, c.nomeCurso, u.nomeUsuario, v.qntAlunosVt, v.cidadeVt, v.ufVt FROM visitastecnicas v INNER JOIN cursos c ON v.fkCurso = c.idCurso INNER JOIN usuarios u ON v.fkResponsavel = u.idUsuario WHERE v.dataVt > CURDATE() AND v.qntAlunosVt > 0;";
+    $sql = "SELECT v.idVt, v.nomeVt,v.justificativaVt, v.localVt , v.dataVt, c.nomeCurso, u.nomeUsuario, v.qntAlunosVt, v.cidadeVt, v.ufVt, v.imgCapaVt FROM visitastecnicas v INNER JOIN cursos c ON v.fkCurso = c.idCurso INNER JOIN usuarios u ON v.fkResponsavel = u.idUsuario WHERE v.dataVt > CURDATE() AND v.qntAlunosVt > 0;";
     $exeSql = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($exeSql) > 0) {
@@ -47,8 +47,11 @@ if (isset($_GET['inscricao'])) {
     <div class="col">
         <div class="card">
             <!-- class h-100-->
-            <img src="includes/img/img_default.png" class="img-thumbnail" style="background-size: cover;"
-                class="card-img-top" alt="...">
+            <img src="./includes/upload/img/<?php echo $dado['imgCapaVt'] ?>" id="capacard" class="img-thumbnail"
+                style="background-size: cover;" class="card-img-top"
+                alt="capa da visita tecnica para a/o <?php echo $dado['localVt'] ?>"
+                onerror="this.src='./includes/img/img_default.png'">
+
             <div class="card-body">
                 <!-- ver a possibilidade de truncar o tamanho do nome e de colocar um codigo aos eventos curso(4caractere) + id + ANO -->
                 <h5 class="card-title text-truncate"><?php echo $dado['nomeVt'] ?></h5>
@@ -70,7 +73,8 @@ if (isset($_GET['inscricao'])) {
             </div>
             <ul class="list-group list-group-flush">
                 </li>
-                <li class="list-group-item small"> <strong>Público-alvo: </strong><?php echo $dado['nomeCurso'] ?></li>
+                <li class="list-group-item small"> <strong>Público-alvo: </strong><?php echo $dado['nomeCurso'] ?>
+                </li>
                 <li class="list-group-item small"> <strong>Responsável: </strong><?php echo $dado['nomeUsuario'] ?>
                 <li class="list-group-item small d-flex justify-content-between">
                     <span>
@@ -89,7 +93,7 @@ if (isset($_GET['inscricao'])) {
 
             <div class="card-footer text-end">
                 <small
-                    class="text-muted"><?php echo $dado['cidadeVt'] . ' - ' . $dado['ufVt'] . ' - ' . date('d/m/Y', strtotime($dado['dataVt'])) ?></small>
+                    class="text-muted"><?php echo $dado['localVt'] . ' - ' . $dado['cidadeVt'] . ' - ' . $dado['ufVt'] . ' - ' . date('d/m/Y', strtotime($dado['dataVt'])) ?></small>
             </div>
 
         </div>

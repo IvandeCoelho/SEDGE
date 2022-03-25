@@ -13,8 +13,8 @@ $hash = md5(strtolower(trim($sqlSelectUsuario['emailUsuario'])));
                 style="max-width:100%" alt="perfil_gravatar" onerror="this.src='includes/img/perfil_default.png'">
             <div class="d-flex justify-content-center ">
                 <a class="bg-success rounded-pill text-light p-1 px-3 text-decoration-none"
-                    href="https://api.whatsapp.com/send?phone=5588999005210&text=" title="Whatsapp" target="_blank"><i
-                        class="bi bi-whatsapp"></i>
+                    href="https://api.whatsapp.com/send?phone=55<?php echo $sqlSelectUsuario['whatsappUsuario'] ?>&text="
+                    title="Whatsapp" target="_blank"><i class="bi bi-whatsapp"></i>
                     <?php echo $sqlSelectUsuario['whatsappUsuario'] ?></a>
             </div>
 

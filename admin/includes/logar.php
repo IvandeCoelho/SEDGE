@@ -29,6 +29,6 @@ if (empty($resultado = mysqli_fetch_assoc($result))) {
   if ($_SESSION['tipoUsuario'] == 1) {
     header("Location: ../home.php");
   } else {
-    header("Location: ../../home.php");
+    header("Location: ../home.php");
   }
 }

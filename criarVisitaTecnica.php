@@ -149,16 +149,19 @@ td:hover {
                         <div class="col-md">
                             <label for="formFile" class="form-label">Upload da programação
                                 <i class="bi bi-file-earmark-pdf"></i></label>
-                            <input class="form-control" type="file" id="formFile" name="programacaoVt">
+                            <input class="form-control" type="file" id="formFile" name="programacaoVt" accept=".pdf"
+                                required>
                         </div>
                         <div class="col-md">
-                            <label for="formFile2" class="form-label">Imagem do evento (1:1)</label>
-                            <input class="form-control" type="file" id="formFile2" name="imgCapaVt">
+                            <label for="formFile2" class="form-label">Imagem do evento (1:1) <i
+                                    class="bi bi-image"></i></label>
+                            <input class="form-control" type="file" id="formFile2" name="imgCapaVt" accept=".png"
+                                required>
                         </div>
-                        <div class="col-md">
+                        <!-- <div class="col-md">
                             <label for="formFile2" class="form-label">Banner do evento (1920px x 700px)</label>
                             <input class="form-control" type="file" id="formFile2" name="imgBannerVt">
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -260,7 +263,6 @@ td:hover {
         }
         ?>
 
-
         <datalist id="listaUsuarios">
             <?php
             $idUsuario =  $_SESSION['idUsuario'];
@@ -329,7 +331,7 @@ td:hover {
                         <div class="col-md">
                             <div class="form-floating">
                                 <select class="form-select" id="floatingSelectGrid"
-                                    aria-label="Floating label select example" name="veiculo">
+                                    aria-label="Floating label select example" name="veiculo" required>
                                     <option selected disabled>Selecione o veiculo</option>
                                     <?php
                                     $sqlVeiculo = mysqli_query($conn, "SELECT * FROM veiculos");
@@ -343,7 +345,7 @@ td:hover {
                                     }
                                     ?>
                                 </select>
-                                <label for="floatingSelectGrid">Selecione o veiculo</label>
+                                <label for="floatingSelectGrid">*Selecione o veiculo</label>
                             </div>
                         </div>
                     </div>
@@ -419,19 +421,3 @@ td:hover {
     </div>
     <input type="submit" value="NOVO EVENTO" class="btn btn-success w-100 btn-lg">
 </form>
-
-<?php
-/*$id = $_SESSION['idUsuario'];
-$logando = "SELECT * FROM usuarios WHERE id_usu = '$id'";
-$result = mysqli_query($conn, $logando);
-$pattern = '/^([[:digit:]]{3})([[:digit:]]{3})([[:digit:]]{3})([[:digit:]]{2})$/';
-$replacement = '$1.$2.$3-$4';
-while ($dado = mysqli_fetch_array($result)) {
-?>
-<tr>
-    <td><?php echo $dado['nome_usu']; ?></td>
-    <td class="text-center"><?php echo preg_replace($pattern, $replacement, $dado['cpf_usu']); ?></td>
-    <td><?php echo $dado['email_usu']; ?></td>
-</tr>
-
-<?php }*/ ?>

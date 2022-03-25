@@ -263,7 +263,7 @@ if (mysqli_num_rows($exeSql) > 0) {
     <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="alert"
         aria-label="Close"></button>
     <h4 class="alert-heading">Olá!</h4>
-    <p>Seja bem-vindo, Você ainda não esta inscrito em nenhuma visita técnica.</p>
+    <p>Seja bem-vindo, Ainda não há visita técnica encerrdas.</p>
     <hr>
     <p class="mb-0">
         Clique em <a href="home.php?pages=visitasDisponiveis.php" class="btn btn-success btn-sm text-decoration-none"

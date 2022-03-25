@@ -69,16 +69,14 @@ CMYK 48 0 100 1
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-12 mt-5">
-                        <?php
-                        include_once '../includes/footer.php';
-                        ?>
-                    </div>
-                </div>
-
-
     </section>
+    <footer class="border-top border-3 pt-3 mt-3">
+        <?php
+        include_once '../includes/footer.php';
+        ?>
+    </footer>
+
+
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"

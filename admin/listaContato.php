@@ -237,7 +237,13 @@ $sqlSelectUsuario = mysqli_query($conn, "SELECT * FROM usuarios JOIN nivelusuari
             <th class="text-center"><?php echo $dado['idUsuario']; ?></th>
             <td class=""><?php echo $dado['nomeUsuario']; ?></td>
             <td class="text-center"><?php echo $dado['contatoUsuario']; ?></td>
-            <td class="text-center"><?php echo $dado['whatsappUsuario']; ?></td>
+            <td class="text-center">
+                <a class="bg-success rounded-pill text-light p-1 px-3 text-decoration-none"
+                    href="https://api.whatsapp.com/send?phone=55<?php echo $dado['whatsappUsuario']; ?>&text="
+                    title="Whatsapp" target="_blank"><i class="bi bi-whatsapp"></i> -
+                    <?php echo $dado['whatsappUsuario']; ?>
+                </a>
+            </td>
             <td class=""><?php echo $dado['emailUsuario']; ?></td>
 
         </tr>
