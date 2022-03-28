@@ -365,52 +365,40 @@ td:hover {
                 data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
 
-                    <div class="row g-2 p-2">
-                        <div class="form-check col-md">
-                            <input class="form-check-input" type="checkbox" value="Diarias professor"
-                                id="diariaProfessor" name="solicitacoes[]">
-                            <label class="form-check-label" for="diariaProfessor">
-                                Diaria Professor
-                            </label>
+                    <!-- ----------------------- -->
+
+                    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="row mb-2">
+                            <div class="col-auto">
+                                <input type="checkbox" class="btn-check" id="diariaprofessor" autocomplete="off"
+                                    name="solicitacoes[]" value="Diaria professor">
+                                <label class="btn btn-outline-primary" for="diariaprofessor">Diaria professor</label>
+                            </div>
+
+                            <div class="col-auto">
+
+                                <input type="checkbox" class="btn-check" id="ajudacusto" autocomplete="off"
+                                    name="solicitacoes[]" value="Ajuda de custo aluno">
+                                <label class="btn btn-outline-primary" for="ajudacusto">Ajuda de custo aluno</label>
+                            </div>
+
+                            <div class="col-auto">
+                                <input type="checkbox" class="btn-check" id="colchonentes" autocomplete="off"
+                                    name="solicitacoes[]" value="Colchonentes">
+                                <label class="btn btn-outline-primary" for="colchonentes">Colchonentes</label>
+                            </div>
+
+                            <div class="col-auto">
+                                <input type="checkbox" class="btn-check" id="alojamento" autocomplete="off"
+                                    name="solicitacoes[]" value="Alojamento">
+                                <label class="btn btn-outline-primary" for="alojamento">Alojamento</label>
+                            </div>
                         </div>
 
-                        <div class="form-check col-md">
-                            <input class="form-check-input" type="checkbox" value="Ajuda de custo aluno" id="custoAluno"
-                                name="solicitacoes[]">
-                            <label class="form-check-label" for="custoAluno">
-                                Ajuda de custo aluno
-                            </label>
-                        </div>
-
-                        <div class="form-check col-md">
-                            <input class="form-check-input" type="checkbox" value="Colchonetes" id="olchonetes"
-                                name="solicitacoes[]">
-                            <label class="form-check-label" for="colchonetes">
-                                Colchonetes
-                            </label>
-                        </div>
-
-                        <div class="form-check col-md">
-                            <input class="form-check-input" type="checkbox" value="Alojamento" id="alojamento"
-                                name="solicitacoes[]">
-                            <label class="form-check-label" for="alojamento">
-                                Alojamento
-                            </label>
-                        </div>
-
-                        <div class="form-check col-md">
-                            <input class="form-check-input" type="checkbox" value="Nenhuma solicitação" id="outro"
-                                name="solicitacoes[]" checked>
-                            <label class="form-check-label" for="outro">
-                                Nenhum
-                            </label>
-                        </div>
-
-                        <div class="form-floating">
-                            <input class="form-control" id="outros" placeholder="Outras solicitações" name="outrosVt">
-                            <label for="outros" class="form-label">Outros</label>
-                        </div>
                     </div>
+
+                    <!-- ----------------------- -->
+
 
                 </div>
             </div>

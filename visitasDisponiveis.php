@@ -38,7 +38,8 @@ if (isset($_GET['inscricao'])) {
 <div class="row row-cols-1 row-cols-md-4 g-2 mb-3">
     <!-- Ver responsividade -->
     <?php
-    $sql = "SELECT v.idVt, v.nomeVt,v.justificativaVt, v.localVt , v.dataVt, c.nomeCurso, u.nomeUsuario, v.qntAlunosVt, v.cidadeVt, v.ufVt, v.imgCapaVt FROM visitastecnicas v INNER JOIN cursos c ON v.fkCurso = c.idCurso INNER JOIN usuarios u ON v.fkResponsavel = u.idUsuario WHERE v.dataVt > CURDATE() AND v.qntAlunosVt > 0;";
+    $sql = "
+    SELECT v.idVt, v.nomeVt,v.justificativaVt, v.localVt , v.dataVt, c.nomeCurso, u.nomeUsuario, v.qntAlunosVt, v.cidadeVt, v.ufVt, v.imgCapaVt, v.status FROM visitastecnicas v INNER JOIN cursos c ON v.fkCurso = c.idCurso INNER JOIN usuarios u ON v.fkResponsavel = u.idUsuario WHERE v.dataVt > CURDATE() AND v.qntAlunosVt > 0 AND status LIKE 1 ORDER BY v.dataVt ASC;";
     $exeSql = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($exeSql) > 0) {
@@ -55,8 +56,8 @@ if (isset($_GET['inscricao'])) {
             <div class="card-body">
                 <!-- ver a possibilidade de truncar o tamanho do nome e de colocar um codigo aos eventos curso(4caractere) + id + ANO -->
                 <h5 class="card-title text-truncate"><?php echo $dado['nomeVt'] ?></h5>
-                <p class="card-text" style="text-align:justify;"> <?php //echo $dado['justificativaVt']; 
-                                                                            ?></p>
+                <!-- <p class="card-text" style="text-align:justify;"> <?php //echo $dado['justificativaVt']; 
+                                                                                ?></p> -->
                 <?php
                         $idUsuario = $_SESSION['idUsuario'];
                         $idVt = $dado['idVt'];

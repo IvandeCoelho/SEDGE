@@ -16,8 +16,11 @@ include_once("includes/security.php");
         integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <!-- Bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="./includes/img/favicon.png" type="image/x-icon">
     <!-- Estilo da pagina -->
     <link rel="stylesheet" href="css/home.css">
+
     <style>
     * {
         font-family: 'Quicksand', sans-serif;

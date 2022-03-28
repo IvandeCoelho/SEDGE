@@ -2,14 +2,16 @@
 require_once('conexao.php');
 session_start();
 
-$solicitacoesVt = '';
+
 if (isset($_POST['solicitacoes'])) {
     $solicitacoes = $_POST['solicitacoes'];
-    foreach ($solicitacoes as $key => $value) {
-        $solicitacoesVt .=  $value . ', ';
+    for ($i = 0; $i < count($solicitacoes); $i++) {
+        $solicitacoesVt = implode(', ', $solicitacoes);
     }
-    $solicitacoesVt .= $_POST['outrosVt'];
+} else {
+    $solicitacoesVt = null;
 }
+
 //Projeto
 $fkResponsavel = $_SESSION['idUsuario'];
 $nomeVt = mysqli_real_escape_string($conn, $_POST['nomeVt']);
@@ -27,8 +29,6 @@ $emailVt = mysqli_real_escape_string($conn, $_POST['contatoEmail']);
 $fkVeiculo = mysqli_real_escape_string($conn, $_POST['veiculo']);
 $fkAcompanhante1      = mysqli_real_escape_string($conn, $_POST['nomeAcompanhante1']);
 $fkAcompanhante2      = mysqli_real_escape_string($conn, $_POST['nomeAcompanhante2']);
-
-
 
 $extensaopdf = strtolower(substr($_FILES['programacaoVt']['name'], -4)); //pega a extensaopdf do arquivo
 $novoNomePdf = md5(time()) . $extensaopdf; //define o nome do arquivo
@@ -62,7 +62,8 @@ $sql = "INSERT INTO visitastecnicas(
         fkAcompanhante1, 
         fkAcompanhante2, 
         fkVeiculo, 
-        solicitacoesVt
+        solicitacoesVt,
+        status
         )
         VALUES
         (
@@ -85,9 +86,9 @@ $sql = "INSERT INTO visitastecnicas(
             '$fkAcompanhante1',
             '$fkAcompanhante2',
             '$fkVeiculo',
-            '$solicitacoes'
+            '$solicitacoesVt',
+            DEFAULT
             )";
-
 
 
 $sqlExe = mysqli_query($conn, $sql);
@@ -97,12 +98,13 @@ if ($sqlExe) {
             Visita <strong>criada</strong> com sucesso!
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>';
-    echo 'sucesso';
+
     header('Location:../home.php?pages=visitaTecnica.php');
 } else {
     $_SESSION['msn'] = '<div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
-        <strong>Desculpe</strong> algo deu errado!
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>';
+    <strong>Desculpe</strong> algo deu errado!
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>';
+
     header('Location:../home.php?pages=visitaTecnica.php');
 }
