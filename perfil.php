@@ -64,7 +64,13 @@ $hash = md5(strtolower(trim($sqlSelectUsuario['emailUsuario'])));
                 -
 
                 <span class="text-primary">
-                    <?php echo $sqlSelectUsuario['nivelUsuario'] ?>
+
+                    <?php $sqlNivel = mysqli_fetch_assoc(mysqli_query($conn, "SELECT usuarios.idUsuario, usuarios.nomeUsuario, usuarios.emailUsuario, usuarios.fkNivelUsuario, nivelusuario.nivelUsuario FROM usuarios JOIN nivelusuario WHERE usuarios.fkNivelUsuario LIKE nivelusuario.idNivelUsuario AND usuarios.idUsuario = '$idUsuario'"));
+
+                    echo $sqlNivel['nivelUsuario'];
+                    
+                    ?>
+
                 </span>
             </span>
             <div class="m-2 p-2 rounded" style="background-color: #e9ecef;">

@@ -2,16 +2,6 @@
 require_once('conexao.php');
 session_start();
 
-
-if (isset($_POST['solicitacoes'])) {
-    $solicitacoes = $_POST['solicitacoes'];
-    for ($i = 0; $i < count($solicitacoes); $i++) {
-        $solicitacoesVt = implode(', ', $solicitacoes);
-    }
-} else {
-    $solicitacoesVt = null;
-}
-
 //Projeto
 $fkResponsavel = $_SESSION['idUsuario'];
 $nomeVt = mysqli_real_escape_string($conn, $_POST['nomeVt']);
@@ -42,7 +32,88 @@ $diretorioImg = 'upload/img/'; //define o diretorioImg para onde enviaremos o ar
 
 move_uploaded_file($_FILES['imgCapaVt']['tmp_name'], $diretorioImg . $novoNomeImg); //efetua o upload
 
-$sql = "INSERT INTO visitastecnicas(
+if (isset($_POST['solicitacoes'])) {
+    $solicitacoes = $_POST['solicitacoes'];
+
+$sqlExe = mysqli_query($conn, "INSERT INTO visitastecnicas(
+    idVt,
+    nomeVt,
+    qntAlunosVt,
+    fkCurso,
+    justificativaVt,
+    localVt,
+    contatoLocalvt,
+    cidadeVt,
+    ufVt, 
+    dataVt, 
+    telefoneLocalVt, 
+    fax, 
+    emailVt, 
+    programacaoVt, 
+    imgCapaVt, 
+    fkResponsavel, 
+    fkAcompanhante1, 
+    fkAcompanhante2, 
+    fkVeiculo, 
+    solicitacoesVt,
+    status
+    )
+    VALUES
+    (
+        DEFAULT,
+        '$nomeVt',
+        '$qntAlunosVt',
+        '$fkCurso',
+        '$justificativaVt',
+        '$localVt',
+        '$contatoLocalvt',
+        '$cidadeVt',
+        '$ufVt',
+        '$dataVt',
+        '$telefoneLocalVt',
+        '$fax',
+        '$emailVt',
+        '$novoNomePdf',
+        '$novoNomeImg',
+        '$fkResponsavel',
+        '$fkAcompanhante1',
+        '$fkAcompanhante2',
+        '$fkVeiculo',
+        1,
+        DEFAULT
+        )");
+        if($sqlExe){
+            $sqlUltimoRegistro = mysqli_query($conn, "SELECT * FROM visitastecnicas WHERE idVt = (SELECT MAX(idVt) FROM visitastecnicas);");
+            $idUltimoRegistro = mysqli_fetch_assoc($sqlUltimoRegistro);
+            $ultimoIdVt =  $idUltimoRegistro['idVt'];
+
+            foreach ($solicitacoes as $key => $value) {
+                //gravar varias solicitacoes
+        $sqlSolicitacoes = mysqli_query($conn, "INSERT INTO solicitacao(idVt, nome, aprovado) VALUES ('$ultimoIdVt','$value',DEFAULT)");                    
+            }
+
+            $_SESSION['msn'] = '<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            Visita <strong>criada</strong> com sucesso!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>';
+        echo '<script>
+            window.location.href = "../home.php?pages=visitaTecnica.php";
+            </script>';
+
+        }else{
+            $_SESSION['msn'] = '<div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+            <strong>Desculpe</strong> algo deu errado!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>';
+            echo '<script>
+                    window.location.href = "../home.php?pages=visitaTecnica.php";
+                    </script>';
+        }
+    
+
+} else {
+
+    $sqlExe = mysqli_query($conn, "INSERT INTO visitastecnicas(
         idVt,
         nomeVt,
         qntAlunosVt,
@@ -86,25 +157,25 @@ $sql = "INSERT INTO visitastecnicas(
             '$fkAcompanhante1',
             '$fkAcompanhante2',
             '$fkVeiculo',
-            '$solicitacoesVt',
+            DEFAULT,
             DEFAULT
-            )";
-
-
-$sqlExe = mysqli_query($conn, $sql);
-
-if ($sqlExe) {
-    $_SESSION['msn'] = '<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-            Visita <strong>criada</strong> com sucesso!
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>';
-
-    header('Location:../home.php?pages=visitaTecnica.php');
-} else {
-    $_SESSION['msn'] = '<div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
-    <strong>Desculpe</strong> algo deu errado!
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>';
-
-    header('Location:../home.php?pages=visitaTecnica.php');
+            )");
+            if($sqlExe){    
+                $_SESSION['msn'] = '<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                Visita <strong>criada</strong> com sucesso!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>';
+            echo '<script>
+                window.location.href = "../home.php?pages=visitaTecnica.php";
+                </script>';
+            }else{
+                $_SESSION['msn'] = '<div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+                <strong>Desculpe</strong> algo deu errado!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>';
+                echo '<script>
+                       window.location.href = "../home.php?pages=visitaTecnica.php";
+                       </script>';
+            }
+            
 }

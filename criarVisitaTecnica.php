@@ -6,10 +6,12 @@ td:hover {
 <h1 class="h1 text-center my-3">Nova Visita Tecnica</h1>
 
 <form action="includes/validaVt.php" method="post" enctype="multipart/form-data">
+    <?php /*   */ ?>
 
     <div class="accordion mb-3" id="accordionFlushExample">
         <div class="accordion-item">
             <h2 class="accordion-header" id="flush-headingOne">
+
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                     <strong><i class="bi bi-grid-1x2"></i> Projeto </strong>
@@ -354,6 +356,7 @@ td:hover {
             </div>
         </div>
 
+
         <div class="accordion-item">
             <h2 class="accordion-header" id="flush-headingSix">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -376,23 +379,22 @@ td:hover {
                             </div>
 
                             <div class="col-auto">
-
                                 <input type="checkbox" class="btn-check" id="ajudacusto" autocomplete="off"
                                     name="solicitacoes[]" value="Ajuda de custo aluno">
                                 <label class="btn btn-outline-primary" for="ajudacusto">Ajuda de custo aluno</label>
                             </div>
 
-                            <div class="col-auto">
+                            <!-- <div class="col-auto">
                                 <input type="checkbox" class="btn-check" id="colchonentes" autocomplete="off"
                                     name="solicitacoes[]" value="Colchonentes">
                                 <label class="btn btn-outline-primary" for="colchonentes">Colchonentes</label>
-                            </div>
+                            </div> -->
 
-                            <div class="col-auto">
+                            <!-- <div class="col-auto">
                                 <input type="checkbox" class="btn-check" id="alojamento" autocomplete="off"
                                     name="solicitacoes[]" value="Alojamento">
                                 <label class="btn btn-outline-primary" for="alojamento">Alojamento</label>
-                            </div>
+                            </div> -->
                         </div>
 
                     </div>
@@ -404,7 +406,6 @@ td:hover {
             </div>
         </div>
     </div>
-
 
     </div>
     <input type="submit" value="NOVO EVENTO" class="btn btn-success w-100 btn-lg">

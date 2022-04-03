@@ -27,6 +27,12 @@
                                 <i class="bi bi-node-plus"></i>    
                                     Criar</a></li>';
                                 } ?>
+                                <?php if ($_SESSION['tipoUsuario'] == 6) {
+                                    echo '
+                                    <li><a href="home.php?pages=aprovarSolicitacoes.php" class="dropdown-item">
+                                    <i class="bi bi-journal-bookmark"></i>   
+                                    Auxilios </a></li>';
+                                } ?>
 
                                 <li><a href="home.php?pages=minhasVisitasTecnica.php" class="dropdown-item">
                                         <i class="bi bi-ui-checks"></i>
