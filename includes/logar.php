@@ -10,7 +10,7 @@ $sqlLogar = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM usuarios WHERE
 
 if (empty($sqlLogar)) {
   $_SESSION['msn'] = '<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
-    <strong>Atenção!</strong> Seu email e/ou senha estão incorretos!
+    <strong>Atenção!</strong> Seu e-mail e/ou senha estão incorretos! 
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>';
   header("Location:../index.php");

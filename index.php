@@ -104,7 +104,7 @@ session_start();
                         </div>
 
                         <div class="col">
-                            Cadastre-se <a href="cad_usu.php" class="link">Aqui</a>
+                            Cadastre-se <a href="cad_usu.php" class="link">aqui</a>
                         </div>
                     </div>
 
