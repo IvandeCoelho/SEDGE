@@ -31,23 +31,6 @@ realizadas pelo IFCE
 ![Git Badge](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 ![GitHub Badge](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
 
-
-## Como Instalar
-
-1. Passo 1
-2. Passo 2
-3. ...
-
-## Como Usar
-
-1. Passo 1
-2. Passo 2
-3. ...
-
-## Arquitetura do Projeto
-
-Explicação sobre a estrutura do projeto.
-
 ## Funcionalidades Principais
 - Cadastro no sistema
 - Login sistema
@@ -81,10 +64,6 @@ unificando registros de visitas, consultas e relatórios gerenciais;
 informações, como identificação e dados bancários;
 - Possibilitar a aceleração do processo de gerenciamento de visitas técnicas;
 - Reduzir o trabalho manual de cadastro, gerenciamento das visitas técnicas
-
-## Licença
-
-Este projeto está sob a licença XYZ. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ## Contato
 
