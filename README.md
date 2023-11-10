@@ -59,7 +59,6 @@ técnicas com base no levantamento de requisitos e funcionalidades
 necessárias para tal;
 - Consolidar os dados das visitas técnicas em apenas uma plataforma,
 unificando registros de visitas, consultas e relatórios gerenciais;
-18
 - Permitir a inscrição on-line dos alunos nas visitas técnicas e o cadastro de suas
 informações, como identificação e dados bancários;
 - Possibilitar a aceleração do processo de gerenciamento de visitas técnicas;
