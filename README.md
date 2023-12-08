@@ -45,7 +45,7 @@ realizadas pelo IFCE
 
 
 ## Demonstração
-![Demonstração](./screenshots/demo.gif)
+![SEDGE - LOGIN](https://github.com/IvandeCoelho/SEDGE/assets/47482589/32ad45e9-3b98-4030-8288-736892b69425)
 ![Demonstração](./screenshots/demo.gif)
 ![Demonstração](./screenshots/demo.gif)
 ![Demonstração](./screenshots/demo.gif)
